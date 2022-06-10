@@ -2,7 +2,7 @@
 Pet Hunter
 
 Sistema criando com o intuito de facilitar a vida de donos que perderam seus animais.<br>
-Trabalho Interdisciplinar: Aplicacões Web | Engenharia de Software Noite | PUC Minas
+Trabalho Interdisciplinar: Aplicacões Web | Engenharia de Software | PUC Minas
 
 ## Alunos integrantes da equipe
 
