@@ -148,13 +148,15 @@ var db_animal_inicial = {
 }
 
 // Caso os dados nao estejam no Local Storage, carrega os dados iniciais
-var db_usu = JSON.parse(localStorage.getItem('db_usuario'));
-if (!db_usu) {
-    db_usu = db_usuario_inicial
+var db_usuario = JSON.parse(localStorage.getItem('db_usuario'));
+if (!db_usuario) {
+    db_usuario = db_usuario_inicial
+    localStorage.setItem('db_usuario', JSON.stringify(db_usuario))
 };
-var db_animal = JSON.parse(localStorage.getItem('db_animal'));
+var db_animal = JSON.parse(localStorage.getItem('db_animais'));
 if (!db_animal) {
     db_animal = db_animal_inicial
+    localStorage.setItem('db_animais', JSON.stringify(db_animal))
 };
 //_______________________________________________________________________________________________________________________
 //LOGIN.HTML - Script para formatação de estilo
@@ -174,7 +176,6 @@ const LOGIN_URL = "login.html";
 
 var db_usuarios = {};
 
-
 var usuarioCorrente = {};
 
 function generateUUID() {
@@ -193,8 +194,6 @@ function generateUUID() {
     });
 }
 
-
-
 const dadosIniciais = {
     usuarios: [
         { "id": generateUUID (), "login": "admin", "senha": "123", "nome": "Administrador do Sistema", "email": "admin@abc.com"},
@@ -202,17 +201,13 @@ const dadosIniciais = {
     ]
 };
 
-
 function initLoginApp () {
-
     usuarioCorrenteJSON = sessionStorage.getItem('usuarioCorrente');
     if (usuarioCorrenteJSON) {
         usuarioCorrente = JSON.parse (usuarioCorrenteJSON);
     }
     
-
     var usuariosJSON = localStorage.getItem('db_usuarios');
-
 
     if (!usuariosJSON) { 
         
@@ -228,9 +223,7 @@ function initLoginApp () {
     }
 };
 
-
 function loginUser (login, senha) {
-    
     for (var i = 0; i < db_usuarios.usuarios.length; i++) {
         var usuario = db_usuarios.usuarios[i];
 
@@ -245,7 +238,6 @@ function loginUser (login, senha) {
             return true;
         }
     }
-
     return false;
 }
 
@@ -256,7 +248,6 @@ function logoutUser () {
 }
 
 function addUser (nome, login, senha, email) {
-
     let newId = generateUUID ();
     let usuario = { "id": newId, "login": login, "senha": senha, "nome": nome, "email": email };
 
@@ -269,54 +260,12 @@ function setUserPass () {
 
 }
 
-
-
 initLoginApp ();
-
- function processaFormLogin (event) {                
-                event.preventDefault ();
-
-                var username = document.getElementById('username').value;
-                var password = document.getElementById('password').value;
-
-                resultadoLogin = loginUser (username, password);
-                if (resultadoLogin) {
-                    window.location.href = 'index.html';
-                }
-                else { 
-                    alert ('Usuário ou senha incorretos');
-                }
-        }
-
-        function salvaLogin (event) {
-
-            event.preventDefault ();
-
-            let login  = document.getElementById('txt_login').value;
-            let nome   = document.getElementById('txt_nome').value;
-            let email  = document.getElementById('txt_email').value;
-            let senha  = document.getElementById('txt_senha').value;
-            let senha2 = document.getElementById('txt_senha2').value;
-            if (senha != senha2) {
-                alert ('As senhas informadas não conferem.');
-                return
-            }
-
-            addUser (nome, login, senha, email);
-            alert ('Usuário salvo com sucesso. Proceda com o login para ');
-
-            $('#loginModal').modal('hide');
-        }
-
-        document.getElementById ('login-form').addEventListener ('submit', processaFormLogin);
-
-
-        document.getElementById ('btn_salvar').addEventListener ('click', salvaLogin);        
 
 //_______________________________________________________________________________________________________________________
 //CRUD de animais
 function petsLeDados () {
-    let strDados = localStorage.getItem('db');
+    let strDados = localStorage.getItem('db_animais');
     let objDados = {};
 
     if (strDados) {
@@ -341,7 +290,7 @@ function petsLeDados () {
 }
 
 function petsSalvaDados (dados) {
-    localStorage.setItem ('db', JSON.stringify (dados));
+    localStorage.setItem ('db_animais', JSON.stringify (dados));
 }
 
 function petsIncluirContato (){
@@ -372,7 +321,7 @@ function petsIncluirContato (){
         descricao: descricao
     };
 
-    objDados.contatos.push (novoContato);
+    objDados.data.push (novoContato);
 
     // Salvar os dados no localStorage novamente
     petsSalvaDados (objDados);
@@ -386,12 +335,12 @@ function petsImprimeDados () {
     let strHtml = '';
     let objDados = petsLeDados ();
     
-    for (i=0; i< objDados.contatos.length; i++) {
-        strHtml += `<p>${objDados.contatos[i].foto}</p>
-        <p>${objDados.contatos[i].tipo} - ${objDados.contatos[i].sexo} - ${objDados.contatos[i].raca}</p>
-        <p>${objDados.contatos[i].situacao} em ${objDados.contatos[i].local}</p>
-        <p>Porte: ${objDados.contatos[i].porte} - Idade: ${objDados.contatos[i].idade}</p>
-        <p>Descrição: ${objDados.contatos[i].descricao}</p>`
+    for (i=0; i< objDados.data.length; i++) {
+        strHtml += `<p>${objDados.data[i].foto}</p>
+        <p>${objDados.data[i].tipo} - ${objDados.data[i].sexo} - ${objDados.data[i].raca}</p>
+        <p>${objDados.data[i].situacao} em ${objDados.data[i].local}</p>
+        <p>Porte: ${objDados.data[i].porte} - Idade: ${objDados.data[i].idade}</p>
+        <p>Descrição: ${objDados.data[i].descricao}</p>`
     }
     
     
@@ -405,22 +354,22 @@ function animaisIndex() {    // É chamada pelo onload da tag body em index.html
     $("#animaisPerdidos").html("");
     $("#animaisEncontrados").html("");
 
+    let objDados = petsLeDados ();
+
     // Popula a tabela com os registros do banco de dados
     //Perdidos
     let j = 0; 
     for (i = 0; j < 3; i++) {
-        let animal = db_animal.data[i];
-        if(animal.situacao == "Perdido")
+        if(objDados.data[i].situacao == "Perdido")
         {
-            let usu = db_usu.data[(animal.usuario_id) - 1];
             j++;
             $("#animaisPerdidos").append(`
             <!-- CARD -->
             <div class="card card_${j}" data-toggle="modal" data-target="#modal${j}">
-                <img src="${animal.foto}" alt="imagem do animal${j}">
+                <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
                 <div class="container">
-                <p>${animal.descricao}</p>
-                <p>${animal.data}</p>
+                <p>${objDados.data[i].descricao}</p>
+                <p>${objDados.data[i].data}</p>
                 </div>
             </div>
                 <!-- MODAL 1.1 -->
@@ -428,21 +377,21 @@ function animaisIndex() {    // É chamada pelo onload da tag body em index.html
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="modal1_titulo">${animal.local}</h5>
+                                <h5 class="modal-title" id="modal1_titulo">${objDados.data[i].local}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <img src="${animal.foto}" alt="imagem do animal${j}">
+                                <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
                                 <div class="modal_texto">
-                                    <p>${animal.tipo} ${animal.sexo} - ${animal.raca} - ${animal.idade}</p>
-                                    <p>${animal.descricao}</p>
+                                    <p>${objDados.data[i].tipo} ${objDados.data[i].sexo} - ${objDados.data[i].raca} - ${objDados.data[i].idade}</p>
+                                    <p>${objDados.data[i].descricao}</p>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <p>Contato: ${usu.contato}</p>
-                                <p><small>Desaparecido em ${animal.data}</small></p>
+                                <p>Contato: ${i}</p>
+                                <p><small>Desaparecido em ${objDados.data[i].data}</small></p>
                             </div>
                         </div>
                     </div>
@@ -452,19 +401,17 @@ function animaisIndex() {    // É chamada pelo onload da tag body em index.html
     //Encontrados
     let k = 0;
     for (i = 0; k < 3; i++) {
-        let animal = db_animal.data[i];
-        if(animal.situacao == "Encontrado")
+        if(objDados.data[i].situacao == "Encontrado")
         {
-            let usu = db_usu.data[(animal.usuario_id) - 1];
             j++;
             k++;
             $("#animaisEncontrados").append(`
             <!-- CARD -->
             <div class="card card_${j}" data-toggle="modal" data-target="#modal${j}">
-                <img src="${animal.foto}" alt="imagem do animal${k}">
+                <img src="${objDados.data[i].foto}" alt="imagem do animal${k}">
                 <div class="container">
-                    <p>${animal.descricao}</p>
-                    <p>${animal.data}</p>
+                    <p>${objDados.data[i].descricao}</p>
+                    <p>${objDados.data[i].data}</p>
                 </div>
             </div>
                 <!-- MODAL -->
@@ -472,21 +419,21 @@ function animaisIndex() {    // É chamada pelo onload da tag body em index.html
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="modal1_titulo">${animal.local}</h5>
+                                <h5 class="modal-title" id="modal1_titulo">${objDados.data[i].local}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <img src="${animal.foto}" alt="imagem do animal${k}">
+                                <img src="${objDados.data[i].foto}" alt="imagem do animal${k}">
                                 <div class="modal_texto">
-                                    <p>${animal.tipo} ${animal.sexo} - ${animal.raca} - ${animal.idade}</p>
-                                    <p>${animal.descricao}</p>
+                                    <p>${objDados.data[i].tipo} ${objDados.data[i].sexo} - ${objDados.data[i].raca} - ${objDados.data[i].idade}</p>
+                                    <p>${objDados.data[i].descricao}</p>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <p>Contato: ${usu.contato}</p>
-                                <p><small>Desaparecido em ${animal.data}</small></p>
+                                <p>Contato: ${i}</p>
+                                <p><small>Desaparecido em ${objDados.data[i].data}</small></p>
                             </div>
                         </div>
                     </div>
@@ -521,22 +468,22 @@ function animaisPerdidos() {    // É chamada pelo onload da tag body em pets_pe
     // Remove todas as linhas do corpo da tabela
     $("#animaisPerdidos").html("");
 
+    let objDados = petsLeDados ();
+
     // Popula a tabela com os registros do banco de dados
     //Perdidos
     let j = 0; 
     for (i = 0; i < db_animal.data.length; i++) {
-        let animal = db_animal.data[i];
-        if(animal.situacao == "Perdido")
+        if(objDados.data[i].situacao == "Perdido")
         {
-            let usu = db_usu.data[(animal.usuario_id) - 1];
             j++;
             $("#animaisPerdidos").append(`
             <!-- CARD -->
-            <div class="card card_${j}" data-toggle="modal" data-target="#modal${j}">
-                <img src="${animal.foto}" alt="imagem do animal${j}">
+            <div class="card" data-toggle="modal" data-target="#modal${j}">
+                <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
                 <div class="container">
-                <p>${animal.descricao}</p>
-                <p>${animal.data}</p>
+                <p>${objDados.data[i].descricao}</p>
+                <p>${objDados.data[i].data}</p>
                 </div>
             </div>
                 <!-- MODAL -->
@@ -544,21 +491,21 @@ function animaisPerdidos() {    // É chamada pelo onload da tag body em pets_pe
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="modal${j}_titulo">${animal.local}</h5>
+                                <h5 class="modal-title" id="modal${j}_titulo">${objDados.data[i].local}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <img src="${animal.foto}" alt="imagem do animal${j}">
+                                <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
                                 <div class="modal_texto">
-                                    <p>${animal.tipo} ${animal.sexo} - ${animal.raca} - ${animal.idade}</p>
-                                    <p>${animal.descricao}</p>
+                                    <p>${objDados.data[i].tipo} ${objDados.data[i].sexo} - ${objDados.data[i].raca} - ${objDados.data[i].idade}</p>
+                                    <p>${objDados.data[i].descricao}</p>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <p>Contato: ${usu.contato}</p>
-                                <p><small>Desaparecido em ${animal.data}</small></p>
+                                <p>Contato: ${i}</p>
+                                <p><small>Desaparecido em ${objDados.data[i].data}</small></p>
                             </div>
                         </div>
                     </div>
@@ -573,22 +520,22 @@ function animaisEncontrados() {    // É chamada pelo onload da tag body em pets
     // Remove tudo que estiver no display dos pets 
     $("#animaisEncontrados").html("");
 
+    let objDados = petsLeDados ();
+
     // Popula a tabela com os registros do banco de dados
     //Perdidos
     let j = 0; 
     for (i = 0; i < db_animal.data.length; i++) {
-        let animal = db_animal.data[i];
-        if(animal.situacao == "Encontrado")
+        if(objDados.data[i].situacao == "Encontrado")
         {
-            let usu = db_usu.data[(animal.usuario_id) - 1];
             j++;
             $("#animaisEncontrados").append(`
             <!-- CARD -->
-            <div class="card card_${j}" data-toggle="modal" data-target="#modal${j}">
-                <img src="${animal.foto}" alt="imagem do animal${j}">
+            <div class="card" data-toggle="modal" data-target="#modal${j}">
+                <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
                 <div class="container">
-                <p>${animal.descricao}</p>
-                <p>${animal.data}</p>
+                <p>${objDados.data[i].descricao}</p>
+                <p>${objDados.data[i].data}</p>
                 </div>
             </div>
                 <!-- MODAL -->
@@ -596,21 +543,21 @@ function animaisEncontrados() {    // É chamada pelo onload da tag body em pets
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="modal${j}_titulo">${animal.local}</h5>
+                                <h5 class="modal-title" id="modal${j}_titulo">${objDados.data[i].local}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <img src="${animal.foto}" alt="imagem do animal${j}">
+                                <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
                                 <div class="modal_texto">
-                                    <p>${animal.tipo} ${animal.sexo} - ${animal.raca} - ${animal.idade}</p>
-                                    <p>${animal.descricao}</p>
+                                    <p>${objDados.data[i].tipo} ${objDados.data[i].sexo} - ${objDados.data[i].raca} - ${objDados.data[i].idade}</p>
+                                    <p>${objDados.data[i].descricao}</p>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <p>Contato: ${usu.contato}</p>
-                                <p><small>Desaparecido em ${animal.data}</small></p>
+                                <p>Contato: ${i}</p>
+                                <p><small>Desaparecido em ${objDados.data[i].data}</small></p>
                             </div>
                         </div>
                     </div>
@@ -625,22 +572,22 @@ function animaisReunidos() {    // É chamada pelo onload da tag body em pets_re
     // Remove todas as linhas do corpo da tabela
     $("#animaisReunidos").html("");
 
+    let objDados = petsLeDados ();
+
     // Popula a tabela com os registros do banco de dados
     //Perdidos
     let j = 0; 
     for (i = 0; i < db_animal.data.length; i++) {
-        let animal = db_animal.data[i];
-        if(animal.situacao == "com_o_dono")
+        if(objDados.data[i].situacao == "com_o_dono")
         {
-            let usu = db_usu.data[(animal.usuario_id) - 1];
             j++;
             $("#animaisReunidos").append(`
             <!-- CARD -->
-            <div class="card card_${j}" data-toggle="modal" data-target="#modal${j}">
-                <img src="${animal.foto}" alt="imagem do animal${j}">
+            <div class="card" data-toggle="modal" data-target="#modal${j}">
+                <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
                 <div class="container">
-                <p>${animal.descricao}</p>
-                <p>${animal.data}</p>
+                <p>${objDados.data[i].descricao}</p>
+                <p>${objDados.data[i].data}</p>
                 </div>
             </div>
                 <!-- MODAL -->
@@ -648,21 +595,21 @@ function animaisReunidos() {    // É chamada pelo onload da tag body em pets_re
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="modal${j}_titulo">${animal.local}</h5>
+                                <h5 class="modal-title" id="modal${j}_titulo">${objDados.data[i].local}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <img src="${animal.foto}" alt="imagem do animal${j}">
+                                <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
                                 <div class="modal_texto">
-                                    <p>${animal.tipo} ${animal.sexo} - ${animal.raca} - ${animal.idade}</p>
-                                    <p>${animal.descricao}</p>
+                                    <p>${objDados.data[i].tipo} ${objDados.data[i].sexo} - ${objDados.data[i].raca} - ${objDados.data[i].idade}</p>
+                                    <p>${objDados.data[i].descricao}</p>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <p>Contato: ${usu.contato}</p>
-                                <p><small>Desaparecido em ${animal.data}</small></p>
+                                <p>Contato: ${i}</p>
+                                <p><small>Desaparecido em ${objDados.data[i].data}</small></p>
                             </div>
                         </div>
                     </div>

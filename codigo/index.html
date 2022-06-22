@@ -68,17 +68,18 @@
     <main class="home">
         <!-- Cadastro de animais -->
         <section class="home">
-            <button type="button" class="btn_amarelo btn cad_btn btn-outline-warning">Cadastrar desaparecimento</button>
-            <button type="button" class="btn_azul btn cad_btn">Cadastrar pet encontrado</button>
+            <button type="button" class="btn_azul btn cad_btn" onclick="window.location = 'cadastro_pet.html'">Cadastrar animal perdido ou encontrado</button>
         </section>
 
         <!-- CARD dos pets -->
         <section class="home">
+            <h2 class="mb-3 ml-3">Pets desaparecidos</h2>
             <div id="animaisPerdidos" class="card_container">
             </div>
             <a href="pets_perdidos.html" class="btn float-right mais_btn"><i class="bi bi-plus-lg"></i>Pets perdidos</a>
         </section>
         <section class="home">
+            <h2 class="m-3">Pets encontrados</h2>
             <div id="animaisEncontrados" class="card_container">
             </div>
             <a href="pets_encontrados.html" class="btn float-right mais_btn"><i class="bi bi-plus-lg"></i>Pets encontrados</a>

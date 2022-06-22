@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/main.js" defer></script>
 	<title>Login/Registro</title>
 </head>
 
@@ -46,7 +47,7 @@
         </div>
         <div class="modal-body">
             <div id="login-box" class="col-md-12">
-                <form id="login-form" class="form" method="post" onsubmit="loginUser (this)">
+                <form id="cadastro-form" class="form" method="post" onsubmit="loginUser (this)">
                     <h3 class="text-center text-info">Novo usuário</h3>
                     <div class="form-group">
                         <label for="login" class="text-info">Usuário</label><br>
@@ -62,11 +63,11 @@
                     </div>
                     <div class="form-group">
                         <label for="senha" class="text-info">Senha</label><br>
-                        <input type="password" name="txt_senha" id="txt_senha" class="form-control">
+                        <input type="password" name="txt_senha" id="txt_senha" class="form-control" autocomplete="on">
                     </div>
                     <div class="form-group">
                         <label for="senha2" class="text-info">Confirmação de Senha</label><br>
-                        <input type="password" name="txt_senha2" id="txt_senha2" class="form-control">
+                        <input type="password" name="txt_senha2" id="txt_senha2" class="form-control" autocomplete="on">
                     </div>
                 </form>
             </div>
@@ -78,9 +79,43 @@
       </div>
     </div>
   </div>
+  <script>
+    function processaFormLogin (event) {                
+        event.preventDefault ();
 
-    <script src="login.js"></script>
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
 
+        resultadoLogin = loginUser (username, password);
+        if (resultadoLogin) {
+            window.location.href = 'index.html';
+        }
+        else { 
+            alert ('Usuário ou senha incorretos');
+        }
+    }
+    function salvaLogin (event) {
+        event.preventDefault ();
+
+        let login  = document.getElementById('txt_login').value;
+        let nome   = document.getElementById('txt_nome').value;
+        let email  = document.getElementById('txt_email').value;
+        let senha  = document.getElementById('txt_senha').value;
+        let senha2 = document.getElementById('txt_senha2').value;
+        if (senha != senha2) {
+            alert ('As senhas informadas não conferem.');
+            return
+        }
+
+        addUser (nome, login, senha, email);
+        alert ('Usuário salvo com sucesso. Proceda com o login para ');
+
+        $('#loginModal').modal('hide');
+    }
+
+    document.getElementById ('login-form').addEventListener ('submit', processaFormLogin);
+    document.getElementById ('btn_salvar').addEventListener ('click', salvaLogin);  
+  </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    

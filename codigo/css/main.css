@@ -121,7 +121,7 @@ section.home:last-of-type {
     margin-right: 5px;
 }
 
-.card_container, #table-animal, #table-animal2 {
+.card_container {
     display: flex;
     width: 90%;
     margin: 0 auto;
@@ -173,6 +173,13 @@ div.modal-body>img {
     justify-content: space-between;
 }
 
+.petsContain {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-flow: wrap row;
+}
+
 @media (max-width: 850px) {
     .card_3, .card_6 {
         display: none !important;
@@ -184,7 +191,7 @@ div.modal-body>img {
         flex-direction: column;
     }
 
-    #table-animal, #table-animal2 {
+    .card_container {
         flex-direction: column;
     }
 
