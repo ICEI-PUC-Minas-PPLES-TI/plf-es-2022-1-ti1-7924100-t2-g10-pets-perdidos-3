@@ -153,7 +153,39 @@ initLoginApp ();
         document.getElementById ('login-form').addEventListener ('submit', processaFormLogin);
 
 
-        document.getElementById ('btn_salvar').addEventListener ('click', salvaLogin);      
+        document.getElementById ('btn_salvar').addEventListener ('click', salvaLogin);   
+
+
+//_______________________________________________________________________________________________________________________
+//Js para usuario corrente
+
+         if (!usuarioCorrente.login) {
+            window.location.href = LOGIN_URL;
+        }
+
+        function exibeUsuarios() {
+            
+            let listaUsuarios = '';
+            for (i = 0; i < db_usuarios.usuarios.length; i++) {
+                let usuario = db_usuarios.usuarios[i];
+                listaUsuarios += `<tr><td scope="row">${usuario.nome}</td><td>${usuario.login}</td><td>${usuario.email}</td></tr>`;
+            }
+
+            document.getElementById("table-usuarios").innerHTML = listaUsuarios
+
+        }
+
+        function initPage() {
+
+            document.getElementById('btn_logout').addEventListener('click', logoutUser);
+
+
+            document.getElementById('nomeUsuario').innerHTML = usuarioCorrente.nome;
+
+            exibeUsuarios ();
+        }
+
+        window.addEventListener('load', initPage);
 
 
 //_______________________________________________________________________________________________________________________
