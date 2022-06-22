@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
     <!-- Metadados -->
     <meta charset="UTF-8">
@@ -18,11 +18,13 @@
         <link rel="stylesheet" href="css/main.css">
     <!-- Script -->
         <!-- Bootstrap v4.0 -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous" defer></script>
+        <!-- Ajax -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" defer></script>
         <!-- Main -->
-        <link rel="stylesheet" href="js/main.js">
+        <script src="js/main.js" defer></script>
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
     <!-- Icone da pagina -->
@@ -31,8 +33,8 @@
     <title>Home - Pets Hunter</title>
 </head>
 
-<body>
-    <!-- Cabeçalho -->
+<body onload="animaisIndex()">
+  <!-- Cabeçalho -->
     <nav class="navbar navbar-expand-md sticky-top">
         <img src="img/logo.png" alt="logo" id="logo" class="navbar-brand">
         <button class="navbar-toggler btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="collapse" data-target="#navegacao" aria-controls="navegacao" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,219 +61,29 @@
             </ul>
         </div>
     </nav>
+    <!-- Imagem de fundo -->
     <header></header>
-    <!-- Destaques -->
+    
+    <!-- Principal -->
     <main class="home">
         <!-- Cadastro de animais -->
         <section class="home">
             <button type="button" class="btn_amarelo btn cad_btn btn-outline-warning">Cadastrar desaparecimento</button>
             <button type="button" class="btn_azul btn cad_btn">Cadastrar pet encontrado</button>
         </section>
-        <!-- Pets desaparecidos -->
+
+        <!-- CARD dos pets -->
         <section class="home">
-            <div id="card_container">
-                <!-- CARD 1.1 -->
-                <div class="card card_1 p_card1" data-toggle="modal" data-target="#modal1">
-                    <img src="img/pet1.jpeg" alt="perdido1">
-                    <div class="container">
-                      <p>Cachorro SRD perdido no Bairro Santo Antônio</p>
-                      <p>20/05/2022</p>
-                    </div>
-                </div>
-                    <!-- MODAL 1.1 -->
-                    <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modal1_titulo" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modal1_titulo">Bairro Santo Antônio</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <img src="img/pet1.jpeg" alt="perdido1">
-                                    <div class="modal_texto">
-                                        <p>Cachorro fêmea - SRD - 3 anos</p>
-                                        <p>Belinha foi perdida no bairro Santo Antônio, com um lacinho na cabeça. Fugiu pelo portão aberto no dia 20/05/2022.</p>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <p>Contato: 99999-9999</p>
-                                    <p><small>Desaparecido em 20/05/2022</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <!-- CARD 2.1 -->
-                <div class="card card_2 p_card2" data-toggle="modal" data-target="#modal2">
-                    <img src="img/pet2.jpeg" alt="perdido2">
-                    <div class="container">
-                      <p>Gato perdido no Bairro Grajaú</p>
-                      <p>12/05/2022</p>
-                    </div>
-                </div>
-                    <!-- MODAL 2.1 -->
-                    <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="modal2_titulo" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modal2_titulo">Bairro Grajaú</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <img src="img/pet2.jpeg" alt="perdido2">
-                                    <div class="modal_texto">
-                                        <p>Gato fêmea - SRD - 4 anos</p>
-                                        <p>Nina foi perdida no bairro Grajaú. Saiu do prédio no dia e não voltou ainda.</p>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <p>Contato: 99999-9999</p>
-                                    <p><small>Desaparecido em 12/05/2022</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <!-- CARD 3.1 -->
-                <div class="card card_3 p_card3" data-toggle="modal" data-target="#modal3">
-                    <img src="img/pet3.jpeg" alt="perdido3">
-                    <div class="container">
-                      <p>Cachorro SRD perdido no Bairro Nova Suiça</p>
-                      <p>22/05/2022</p>
-                    </div>
-                </div>
-                    <!-- MODAL 3.1 -->
-                    <div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="modal3_titulo" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modal3_titulo">Bairro Nova Suiça</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <img src="img/pet3.jpeg" alt="perdido3">
-                                    <div class="modal_texto">
-                                        <p>Cachorro fêmea - SRD - 2,5 anos</p>
-                                        <p>Mel foi perdida no bairro Nova Suiça no dia 22/05/2022. É de pequeno porte, branquinha e agitada.</p>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <p>Contato: 99999-9999</p>
-                                    <p><small>Desaparecido em 22/05/2022</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div id="animaisPerdidos" class="card_container">
             </div>
             <a href="pets_perdidos.html" class="btn float-right mais_btn"><i class="bi bi-plus-lg"></i>Pets perdidos</a>
         </section>
-        <!-- Pets encontrados -->
         <section class="home">
-            <div id="card_container">
-                <!-- CARD 1.2 -->
-                <div class="card card_1 e_card1" data-toggle="modal" data-target="#modal4">
-                    <img src="img/pet4.jpg" alt="encontrado1">
-                    <div class="container">
-                    <p>Cachorro SRD encontrado no bairro Jardim América</p>
-                    <p>15/05/2022</p>
-                    </div>
-                </div>
-                    <!-- MODAL 1.2 -->
-                    <div class="modal fade" id="modal4" tabindex="-1" role="dialog" aria-labelledby="modal4_titulo" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modal4_titulo">Bairro Jardim América</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <img src="img/pet4.jpg" alt="encontrado1">
-                                    <div class="modal_texto">
-                                        <p>Cachorro fêmea - SRD - Grande porte</p>
-                                        <p>Encontrada no bairro Jardim América dentro de um lote abandonado.</p>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <p>Contato: 99999-9999</p>
-                                    <p><small>Encontrado em 15/05/2022</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <!-- CARD 2.2 -->
-                <div class="card card_2 e_card2" data-toggle="modal" data-target="#modal5">
-                    <img src="img/pet5.jpg" alt="encontrado2">
-                    <div class="container">
-                        <p>Cachorro SRD encontrado no bairro Buritis</p>
-                    <p>18/05/2022</p>
-                    </div>
-                </div>
-                    <!-- MODAL 2.2 -->
-                    <div class="modal fade" id="modal5" tabindex="-1" role="dialog" aria-labelledby="modal5_titulo" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modal5_titulo">Bairro Buritis</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <img src="img/pet5.jpg" alt="encontrado2">
-                                    <div class="modal_texto">
-                                        <p>Cachorro fêmea - SRD - Grande porte</p>
-                                        <p>Encontrada no bairro Burutis, bem cuidada.</p>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <p>Contato: 99999-9999</p>
-                                    <p><small>Encontrado em 18/05/2022</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <!-- CARD 3 -->
-                <div class="card card_3 e_card3" data-toggle="modal" data-target="#modal6">
-                    <img src="img/pet6.png" alt="encontrado3">
-                    <div class="container">
-                    <p>Cachorro SRD encontrado no bairro Salgado Filho</p>
-                    <p>21/05/2022</p>
-                    </div>
-                </div>
-                    <!-- MODAL 3.2 -->
-                    <div class="modal fade" id="modal6" tabindex="-1" role="dialog" aria-labelledby="modal6_titulo" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modal6_titulo">Bairro Salgado Filho</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <img src="img/pet6.png" alt="encontrado3">
-                                    <div class="modal_texto">
-                                        <p>Cachorro fêmea - SRD - Grande porte</p>
-                                        <p>Encontrada no bairro Salgado Filho em 21/05/2022 com coleira e nome "Maya".</p>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <p>Contato: 99999-9999</p>
-                                    <p><small>Encontrado em 21/05/2022</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div id="animaisEncontrados" class="card_container">
             </div>
-            <a href="pets_perdidos.html" class="btn float-right mais_btn"><i class="bi bi-plus-lg"></i>Pets encontrados</a>
+            <a href="pets_encontrados.html" class="btn float-right mais_btn"><i class="bi bi-plus-lg"></i>Pets encontrados</a>
         </section>
-    </main>
+
     <!-- Rodapé -->
     <footer class="text-center text-lg-start bg-secondary text-white home" id="rodape">
         <!-- Redes sociais -->
@@ -310,4 +122,5 @@
         </div>
     </footer>
 </body>
+
 </html>

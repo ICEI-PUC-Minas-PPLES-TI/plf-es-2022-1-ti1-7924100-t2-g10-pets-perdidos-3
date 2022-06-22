@@ -10,7 +10,7 @@
         </div>
         <div class="modal-body">
             <div id="login-box" class="col-md-12">
-                <form id="login-form" class="form" method="post" onsubmit="loginUser (this)">
+                <form id="login-form" class="form" method="post" onsubmit="loginUser (this), processaFormLogin()">
                     <h3 class="text-center text-info">Novo usuário</h3>
                     <div class="form-group">
                         <label for="login" class="text-info">Usuário</label><br>
@@ -37,7 +37,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" id="btn_salvar" class="btn btn-info">Salvar</button>
+          <button type="button" id="btn_salvar" class="btn btn-info" onclick="salvaLogin()">Salvar</button>
         </div>
       </div>
     </div>

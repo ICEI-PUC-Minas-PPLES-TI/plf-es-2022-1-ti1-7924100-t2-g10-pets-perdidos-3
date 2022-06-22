@@ -10,27 +10,27 @@ body {
     margin-left: 10px;
 }
 
-.btn_azul {
+button.btn_azul {
     background-color: white;
     color: #65cfcf;
     border: solid 2px #65cfcf;
     font-size: large;
 }
 
-.btn_azul:hover {
+button.btn_azul:hover {
     background-color: #65cfcf;
     border: solid 2px #65cfcf;
     color: white;
 }
 
-.btn_amarelo {
+button.btn_amarelo {
     background-color: white;
     color: #edca2d;
     border: solid 2px #edca2d;
     font-size: large;
 }
 
-.btn_amarelo:hover {
+button.btn_amarelo:hover {
     background-color: #edca2d;
     border: solid 2px #edca2d;
     color: white;
@@ -70,7 +70,7 @@ section {
 section.home:first-of-type {
     display: flex;
     justify-content: center;
-    padding: 0;
+    background-color: white !important;
 }
 
 section.home:last-of-type {
@@ -98,7 +98,7 @@ section.home:last-of-type {
     margin-right: 5px;
 }
 
-#card_container {
+.card_container, #table-animal, #table-animal2 {
     display: flex;
     width: 90%;
     margin: 0 auto;
@@ -151,8 +151,8 @@ div.modal-body>img {
 }
 
 @media (max-width: 850px) {
-    .card_3 {
-        display: none;
+    .card_3, .card_6 {
+        display: none !important;
     }
 }
 
@@ -161,7 +161,7 @@ div.modal-body>img {
         flex-direction: column;
     }
 
-    #card_container {
+    #table-animal, #table-animal2 {
         flex-direction: column;
     }
 
