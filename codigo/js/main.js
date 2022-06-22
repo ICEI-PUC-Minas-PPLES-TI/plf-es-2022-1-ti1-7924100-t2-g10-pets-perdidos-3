@@ -169,9 +169,11 @@ function random_img() {     // É chamada pelo onload da tag body em login.html
 //_______________________________________________________________________________________________________________________
 //Login e cadastro de usuário
 
+
 const LOGIN_URL = "login.html";
 
 var db_usuarios = {};
+
 
 var usuarioCorrente = {};
 
@@ -191,6 +193,8 @@ function generateUUID() {
     });
 }
 
+
+
 const dadosIniciais = {
     usuarios: [
         { "id": generateUUID (), "login": "admin", "senha": "123", "nome": "Administrador do Sistema", "email": "admin@abc.com"},
@@ -198,14 +202,17 @@ const dadosIniciais = {
     ]
 };
 
+
 function initLoginApp () {
 
     usuarioCorrenteJSON = sessionStorage.getItem('usuarioCorrente');
     if (usuarioCorrenteJSON) {
         usuarioCorrente = JSON.parse (usuarioCorrenteJSON);
     }
+    
 
     var usuariosJSON = localStorage.getItem('db_usuarios');
+
 
     if (!usuariosJSON) { 
         
@@ -262,68 +269,49 @@ function setUserPass () {
 
 }
 
+
+
 initLoginApp ();
 
-function processaFormLogin (event) {                
-    event.preventDefault ();
+ function processaFormLogin (event) {                
+                event.preventDefault ();
 
-    var username = document.getElementById('username').value;
-    var password = document.getElementById('password').value;
+                var username = document.getElementById('username').value;
+                var password = document.getElementById('password').value;
 
-    resultadoLogin = loginUser (username, password);
-    if (resultadoLogin) {
-        window.location.href = 'index.html';
-    }
-    else { 
-        alert ('Usuário ou senha incorretos');
-    }
-}
+                resultadoLogin = loginUser (username, password);
+                if (resultadoLogin) {
+                    window.location.href = 'index.html';
+                }
+                else { 
+                    alert ('Usuário ou senha incorretos');
+                }
+        }
 
-function salvaLogin (event) {
+        function salvaLogin (event) {
 
-    event.preventDefault ();
+            event.preventDefault ();
 
-    let login  = document.getElementById('txt_login').value;
-    let nome   = document.getElementById('txt_nome').value;
-    let email  = document.getElementById('txt_email').value;
-    let senha  = document.getElementById('txt_senha').value;
-    let senha2 = document.getElementById('txt_senha2').value;
-    if (senha != senha2) {
-        alert ('As senhas informadas não conferem.');
-        return
-    }
+            let login  = document.getElementById('txt_login').value;
+            let nome   = document.getElementById('txt_nome').value;
+            let email  = document.getElementById('txt_email').value;
+            let senha  = document.getElementById('txt_senha').value;
+            let senha2 = document.getElementById('txt_senha2').value;
+            if (senha != senha2) {
+                alert ('As senhas informadas não conferem.');
+                return
+            }
 
-    addUser (nome, login, senha, email);
-    alert ('Usuário salvo com sucesso. Proceda com o login para ');
+            addUser (nome, login, senha, email);
+            alert ('Usuário salvo com sucesso. Proceda com o login para ');
 
-    $('#loginModal').modal('hide');
-}
+            $('#loginModal').modal('hide');
+        }
 
-// document.getElementById ('login-form').addEventListener ('submit', processaFormLogin); --- Acontece pelo onsubmit do form na pagina cadastro_usuario.html
-//document.getElementById ('btn_salvar').addEventListener ('click', salvaLogin); --- Acontece pelo onclick do button na pagina cadastro_usuario.html
+        document.getElementById ('login-form').addEventListener ('submit', processaFormLogin);
 
 
-//_______________________________________________________________________________________________________________________
-//Js para usuario corrente
-
-function estaLogado() {
-    if (!usuarioCorrente.login) {
-        window.location.href = LOGIN_URL;
-    }
-}
-
-function exibeUsuarios() {
-            
-    let listaUsuarios = '';
-    for (i = 0; i < db_usuarios.usuarios.length; i++) {
-        let usuario = db_usuarios.usuarios[i];
-        listaUsuarios += `<tr><td scope="row">${usuario.nome}</td><td>${usuario.login}</td><td>${usuario.email}</td></tr>`;
-    }
-
-    //document.getElementById("table-usuarios").innerHTML = listaUsuarios
-
-}
-
+        document.getElementById ('btn_salvar').addEventListener ('click', salvaLogin);        
 
 //_______________________________________________________________________________________________________________________
 //CRUD de animais
