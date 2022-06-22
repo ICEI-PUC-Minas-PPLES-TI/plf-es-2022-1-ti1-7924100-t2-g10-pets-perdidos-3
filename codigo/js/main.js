@@ -320,19 +320,9 @@ function exibeUsuarios() {
         listaUsuarios += `<tr><td scope="row">${usuario.nome}</td><td>${usuario.login}</td><td>${usuario.email}</td></tr>`;
     }
 
-    document.getElementById("table-usuarios").innerHTML = listaUsuarios
+    //document.getElementById("table-usuarios").innerHTML = listaUsuarios
 
 }
-
-function initPage() {
-
-    document.getElementById('btn_logout').addEventListener('click', logoutUser);
-    document.getElementById('nomeUsuario').innerHTML = usuarioCorrente.nome;
-
-    exibeUsuarios ();
-}
-
-window.addEventListener('load', initPage);
 
 
 //_______________________________________________________________________________________________________________________

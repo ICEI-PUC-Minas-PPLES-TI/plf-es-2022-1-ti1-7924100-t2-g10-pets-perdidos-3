@@ -1,5 +1,14 @@
-
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/main.js" defer></script>
+  <title>Document</title>
+</head>
+<body onload="initPage()">
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -26,11 +35,11 @@
                     </div>
                     <div class="form-group">
                         <label for="senha" class="text-info">Senha</label><br>
-                        <input type="password" name="txt_senha" id="txt_senha" class="form-control">
+                        <input type="password" name="txt_senha" id="txt_senha" class="form-control" autocomplete="on">
                     </div>
                     <div class="form-group">
                         <label for="senha2" class="text-info">Confirmação de Senha</label><br>
-                        <input type="password" name="txt_senha2" id="txt_senha2" class="form-control">
+                        <input type="password" name="txt_senha2" id="txt_senha2" class="form-control" autocomplete="on">
                     </div>
                 </form>
             </div>
@@ -41,3 +50,14 @@
         </div>
       </div>
     </div>
+    <script>
+      function initPage() {
+      
+          //document.getElementById('btn_logout').addEventListener('click', logoutUser);
+          //document.getElementById('nomeUsuario').innerHTML = usuarioCorrente.nome;
+      
+          exibeUsuarios ();
+      }
+    </script>
+</body>
+</html>
