@@ -439,7 +439,7 @@ function animaisIndex() {    // É chamada pelo onload da tag body em index.html
             $("#animaisPerdidos").append(`
             <!-- CARD -->
             <div class="card card_${j}" data-toggle="modal" data-target="#modal${j}">
-                <img src="${animal.foto}" alt="perdido${j}">
+                <img src="${animal.foto}" alt="imagem do animal${j}">
                 <div class="container">
                 <p>${animal.descricao}</p>
                 <p>${animal.data}</p>
@@ -456,7 +456,7 @@ function animaisIndex() {    // É chamada pelo onload da tag body em index.html
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <img src="${animal.foto}" alt="perdido${j}">
+                                <img src="${animal.foto}" alt="imagem do animal${j}">
                                 <div class="modal_texto">
                                     <p>${animal.tipo} ${animal.sexo} - ${animal.raca} - ${animal.idade}</p>
                                     <p>${animal.descricao}</p>
@@ -483,7 +483,7 @@ function animaisIndex() {    // É chamada pelo onload da tag body em index.html
             $("#animaisEncontrados").append(`
             <!-- CARD -->
             <div class="card card_${j}" data-toggle="modal" data-target="#modal${j}">
-                <img src="${animal.foto}" alt="encontrado${k}">
+                <img src="${animal.foto}" alt="imagem do animal${k}">
                 <div class="container">
                     <p>${animal.descricao}</p>
                     <p>${animal.data}</p>
@@ -500,7 +500,7 @@ function animaisIndex() {    // É chamada pelo onload da tag body em index.html
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <img src="${animal.foto}" alt="encontrado${k}">
+                                <img src="${animal.foto}" alt="imagem do animal${k}">
                                 <div class="modal_texto">
                                     <p>${animal.tipo} ${animal.sexo} - ${animal.raca} - ${animal.idade}</p>
                                     <p>${animal.descricao}</p>
@@ -522,9 +522,10 @@ function pesquisar() {
     let input = document.getElementById('pesquisa').value
     input=input.toLowerCase();
     let animais = document.getElementsByClassName('card');
+    let modal = document.getElementsByClassName('modal');
       
     for (i = 0; i < animais.length; i++) { 
-        if (!animais[i].innerHTML.toLowerCase().includes(input)) {
+        if (!modal[i].innerHTML.toLowerCase().includes(input)) {
             animais[i].style.display="none";
         }
         else {
@@ -537,14 +538,112 @@ function pesquisar() {
 
 //_______________________________________________________________________________________________________________________
 //Página de animais perdidos
+    //PETS_PERDIDOS.HTML - Completando a pagina com os pets corretos
+function animaisPerdidos() {    // É chamada pelo onload da tag body em pets_perdidos.html
+    // Remove todas as linhas do corpo da tabela
+    $("#animaisPerdidos").html("");
 
+    // Popula a tabela com os registros do banco de dados
+    //Perdidos
+    let j = 0; 
+    for (i = 0; i < db_animal.data.length; i++) {
+        let animal = db_animal.data[i];
+        if(animal.situacao == "Perdido")
+        {
+            let usu = db_usu.data[(animal.usuario_id) - 1];
+            j++;
+            $("#animaisPerdidos").append(`
+            <!-- CARD -->
+            <div class="card card_${j}" data-toggle="modal" data-target="#modal${j}">
+                <img src="${animal.foto}" alt="imagem do animal${j}">
+                <div class="container">
+                <p>${animal.descricao}</p>
+                <p>${animal.data}</p>
+                </div>
+            </div>
+                <!-- MODAL -->
+                <div class="modal fade" id="modal${j}" tabindex="-1" role="dialog" aria-labelledby="modal${j}_titulo" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal${j}_titulo">${animal.local}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="${animal.foto}" alt="imagem do animal${j}">
+                                <div class="modal_texto">
+                                    <p>${animal.tipo} ${animal.sexo} - ${animal.raca} - ${animal.idade}</p>
+                                    <p>${animal.descricao}</p>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <p>Contato: ${usu.contato}</p>
+                                <p><small>Desaparecido em ${animal.data}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`);
+        }
+    }
+}
 //_______________________________________________________________________________________________________________________
 //Página de animais encontrados
+    //PETS_ENCONTRADOS.HTML - Completando a pagina com os pets corretos
+function animaisEncontrados() {    // É chamada pelo onload da tag body em pets_encontrados.html
+    // Remove todas as linhas do corpo da tabela
+    $("#animaisEncontrados").html("");
 
+    // Popula a tabela com os registros do banco de dados
+    //Perdidos
+    let j = 0; 
+    for (i = 0; i < db_animal.data.length; i++) {
+        let animal = db_animal.data[i];
+        if(animal.situacao == "Encontrado")
+        {
+            let usu = db_usu.data[(animal.usuario_id) - 1];
+            j++;
+            $("#animaisEncontrados").append(`
+            <!-- CARD -->
+            <div class="card card_${j}" data-toggle="modal" data-target="#modal${j}">
+                <img src="${animal.foto}" alt="imagem do animal${j}">
+                <div class="container">
+                <p>${animal.descricao}</p>
+                <p>${animal.data}</p>
+                </div>
+            </div>
+                <!-- MODAL -->
+                <div class="modal fade" id="modal${j}" tabindex="-1" role="dialog" aria-labelledby="modal${j}_titulo" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal${j}_titulo">${animal.local}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="${animal.foto}" alt="imagem do animal${j}">
+                                <div class="modal_texto">
+                                    <p>${animal.tipo} ${animal.sexo} - ${animal.raca} - ${animal.idade}</p>
+                                    <p>${animal.descricao}</p>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <p>Contato: ${usu.contato}</p>
+                                <p><small>Desaparecido em ${animal.data}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`);
+        }
+    }
+}
 //_______________________________________________________________________________________________________________________
 //Página de animais com os donos
-    //INDEX.HTML - Completando a pagina inicial
-function animaisReunidos() {    // É chamada pelo onload da tag body em index.html
+    //PETS_REUNIDOS.HTML - Completando a pagina com os pets corretos
+function animaisReunidos() {    // É chamada pelo onload da tag body em pets_reunidos.html
     // Remove todas as linhas do corpo da tabela
     $("#animaisReunidos").html("");
 
@@ -577,7 +676,7 @@ function animaisReunidos() {    // É chamada pelo onload da tag body em index.h
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <img src="${animal.foto}" alt="perdido${j}">
+                                <img src="${animal.foto}" alt="imagem do animal${j}">
                                 <div class="modal_texto">
                                     <p>${animal.tipo} ${animal.sexo} - ${animal.raca} - ${animal.idade}</p>
                                     <p>${animal.descricao}</p>
