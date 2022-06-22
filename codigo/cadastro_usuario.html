@@ -1,13 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="js/main.js" defer></script>
-  <title>Document</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login/Registro</title>
 </head>
-<body onload="initPage()">
+
+<body>
+	<div id="login">
+		<h3 class="text-center text-white pt-5">Novo Usuário</h3>
+		<div class="container">
+			<div id="login-row" class="row justify-content-center align-items-center">
+				<div id="login-column" class="col-md-6">
+					<div id="login-box" class="col-md-12">
+						<form id="login-form" class="form" method="post" onsubmit="loginUser (this)">
+							<h3 class="text-center text-info">Login</h3>
+							<div class="form-group">
+								<label for="username" class="text-info">Usuário</label><br>
+                                <input type="text" name="username" id="username" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="text-info">Senha</label><br>
+                                <input type="text" name="password" id="password" class="form-control">
+                            </div>
+                            <div class="form-group text-right">                                
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                            </div>
+                        </form>
+                    </div>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#loginModal">Novo usuario</button>
+                </div>
+            </div>
+        </div>
+    </div>    
+
   <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -19,7 +46,7 @@
         </div>
         <div class="modal-body">
             <div id="login-box" class="col-md-12">
-                <form id="login-form" class="form" method="post" onsubmit="loginUser (this), processaFormLogin()">
+                <form id="login-form" class="form" method="post" onsubmit="loginUser (this)">
                     <h3 class="text-center text-info">Novo usuário</h3>
                     <div class="form-group">
                         <label for="login" class="text-info">Usuário</label><br>
@@ -35,29 +62,27 @@
                     </div>
                     <div class="form-group">
                         <label for="senha" class="text-info">Senha</label><br>
-                        <input type="password" name="txt_senha" id="txt_senha" class="form-control" autocomplete="on">
+                        <input type="password" name="txt_senha" id="txt_senha" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="senha2" class="text-info">Confirmação de Senha</label><br>
-                        <input type="password" name="txt_senha2" id="txt_senha2" class="form-control" autocomplete="on">
+                        <input type="password" name="txt_senha2" id="txt_senha2" class="form-control">
                     </div>
                 </form>
             </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" id="btn_salvar" class="btn btn-info" onclick="salvaLogin()">Salvar</button>
+          <button type="button" id="btn_salvar" class="btn btn-info">Salvar</button>
         </div>
       </div>
     </div>
-    <script>
-      function initPage() {
-      
-          //document.getElementById('btn_logout').addEventListener('click', logoutUser);
-          //document.getElementById('nomeUsuario').innerHTML = usuarioCorrente.nome;
-      
-          exibeUsuarios ();
-      }
-    </script>
+  </div>
+
+    <script src="login.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    
 </body>
 </html>
