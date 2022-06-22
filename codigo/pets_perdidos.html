@@ -35,11 +35,12 @@
 <body onload="animaisPerdidos()">
     <!-- NAV com barra de pesquisa -->
     <nav class="navbar navbar-expand-md sticky-top">
+        <!-- Logo -->
         <img src="img/logo.png" alt="logo" id="logo" class="navbar-brand">
         <button class="navbar-toggler btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="collapse" data-target="#navegacao" aria-controls="navegacao" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-list"></i>
         </button>
-
+        <!-- Links -->
         <div class="collapse navbar-collapse" id="navegacao">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -55,6 +56,7 @@
                     <a class="nav-link" href="login.html" id="login">Login</a>
                 </li>
             </ul>
+            <!-- Pesquisa -->
             <form class="form-inline my-2 my-lg-0 m-2">
                 <input class="form-control mr-sm-2" id="pesquisa" type="search" placeholder="Pesquisar" aria-label="Pesquisar" onkeyup="pesquisar()">
                 <button class="btn btn-outline-light my-2 my-sm-0" id="btnPesquisar" type="submit"><i class="bi bi-search" onclick="pesquisar()"></i></button>

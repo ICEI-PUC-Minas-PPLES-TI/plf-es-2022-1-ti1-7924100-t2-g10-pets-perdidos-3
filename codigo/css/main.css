@@ -19,7 +19,7 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
-
+/* Globais */
 body {
     max-width:100%;
     width: 100vw;

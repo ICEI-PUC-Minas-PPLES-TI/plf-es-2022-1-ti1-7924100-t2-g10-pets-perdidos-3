@@ -592,7 +592,7 @@ function animaisPerdidos() {    // É chamada pelo onload da tag body em pets_pe
 //Página de animais encontrados
     //PETS_ENCONTRADOS.HTML - Completando a pagina com os pets corretos
 function animaisEncontrados() {    // É chamada pelo onload da tag body em pets_encontrados.html
-    // Remove todas as linhas do corpo da tabela
+    // Remove tudo que estiver no display dos pets 
     $("#animaisEncontrados").html("");
 
     // Popula a tabela com os registros do banco de dados
