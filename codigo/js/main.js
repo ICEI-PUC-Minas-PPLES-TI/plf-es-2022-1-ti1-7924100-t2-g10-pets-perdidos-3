@@ -688,4 +688,3 @@ function animaisReunidos() {    // É chamada pelo onload da tag body em pets_re
 
 //_______________________________________________________________________________________________________________________
 //Encontrados
-
