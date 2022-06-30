@@ -1,123 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/main.js" defer></script>
-	<title>Login/Registro</title>
+    <!-- Metadados -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="copyright" content="© 2022 Pets Hunter" />
+    <meta name="description" content="Divulgação de pets perdidos" />
+    <meta name="keywords" content="animal, pet, cachorro, gato, desaparecido, perdido, encontrado, localização" />
+    <!-- Style -->
+        <!-- Bootstrap v4.0 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- Main -->
+        <link rel="stylesheet" href="css/main.css">
+    <!-- Script -->
+        <!-- Bootstrap v4.0 -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous" defer></script>
+        <!-- Main -->
+        <script src="js/main.js" defer></script>
+    <!-- Icone da pagina -->
+    <link rel="sortcut icon" href="img/transp_logo.png" type="image/x-icon"/>
+    <!-- Título da página-->
+    <title>Cadastro - Pets Hunter</title>
 </head>
 
 <body>
-	<div id="login">
-		<h3 class="text-center text-white pt-5">Novo Usuário</h3>
-		<div class="container">
-			<div id="login-row" class="row justify-content-center align-items-center">
-				<div id="login-column" class="col-md-6">
-					<div id="login-box" class="col-md-12">
-						<form id="login-form" class="form" method="post" onsubmit="loginUser (this)">
-							<h3 class="text-center text-info">Login</h3>
-							<div class="form-group">
-								<label for="username" class="text-info">Usuário</label><br>
-                                <input type="text" name="username" id="username" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="password" class="text-info">Senha</label><br>
-                                <input type="text" name="password" id="password" class="form-control">
-                            </div>
-                            <div class="form-group text-right">                                
-                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
-                            </div>
-                        </form>
-                    </div>
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#loginModal">Novo usuario</button>
+    <main class="cadastro container row">
+        <section class="col-md-8 cadastro">
+            <h1>Cadastro</h1>
+            <form id="cadastro-form" class="form" method="post">
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" name="nome" id="nome" class="form-control" required>
                 </div>
-            </div>
-        </div>
-    </div>    
+                <div class="form-group">
+                    <label for="contato">Contato</label>
+                    <input type="radio" id="email" name="tipo-contato" value="email" onclick="selectTipo(this.value)" required>
+                    <label for="email">email</label>
+                    <input type="radio" id="telefone" name="tipo-contato" value="telefone" onclick="selectTipo(this.value)" required>
+                    <label for="telefone">telefone</label>
+                </div>
+                <div class="form-group">
+                    <label id="lblContato" for="contato">Contato</label>
+                    <input type="text" name="contato" id="contato" class="form-control" placeholder="email ou telefone" required>
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" name="senha" id="senha" class="form-control" autocomplete="on" required>
+                </div>
+                <div class="form-group">
+                    <label for="confSenha">Confirmação de senha</label>
+                    <input type="password" name="confSenha" id="confSenha" class="form-control" autocomplete="on" required>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn_azul" value="cadastro">Cadastrar</button>
+                </div>
+            </form>
+        </section>
+    </main>
 
-  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="loginModalLabel"></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <div id="login-box" class="col-md-12">
-                <form id="cadastro-form" class="form" method="post" onsubmit="loginUser (this)">
-                    <h3 class="text-center text-info">Novo usuário</h3>
-                    <div class="form-group">
-                        <label for="login" class="text-info">Usuário</label><br>
-                        <input type="text" name="txt_login" id="txt_login" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="nome" class="text-info">Nome completo</label><br>
-                        <input type="text" name="txt_nome" id="txt_nome" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="text-info">email</label><br>
-                        <input type="text" name="txt_email" id="txt_email" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="senha" class="text-info">Senha</label><br>
-                        <input type="password" name="txt_senha" id="txt_senha" class="form-control" autocomplete="on">
-                    </div>
-                    <div class="form-group">
-                        <label for="senha2" class="text-info">Confirmação de Senha</label><br>
-                        <input type="password" name="txt_senha2" id="txt_senha2" class="form-control" autocomplete="on">
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" id="btn_salvar" class="btn btn-info">Salvar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <script>
-    function processaFormLogin (event) {                
-        event.preventDefault ();
-
-        var username = document.getElementById('username').value;
-        var password = document.getElementById('password').value;
-
-        resultadoLogin = loginUser (username, password);
-        if (resultadoLogin) {
-            window.location.href = 'index.html';
-        }
-        else { 
-            alert ('Usuário ou senha incorretos');
-        }
-    }
-    function salvaLogin (event) {
-        event.preventDefault ();
-
-        let login  = document.getElementById('txt_login').value;
-        let nome   = document.getElementById('txt_nome').value;
-        let email  = document.getElementById('txt_email').value;
-        let senha  = document.getElementById('txt_senha').value;
-        let senha2 = document.getElementById('txt_senha2').value;
-        if (senha != senha2) {
-            alert ('As senhas informadas não conferem.');
-            return
+    <script>
+        function selectTipo(tipo) {
+            if(tipo == "email")
+            {
+                document.getElementById('contato').setAttribute('type', 'email');
+                document.getElementById('lblContato').innerHTML = "Email";
+                document.getElementById('contato').setAttribute('placeholder', 'Seu email');
+                document.getElementById('contato').removeAttribute('minlength');
+                document.getElementById('contato').removeAttribute('maxlength');
+            }
+            else
+            {
+                document.getElementById('contato').setAttribute('type', 'number');
+                document.getElementById('lblContato').innerHTML = "Telefone";
+                document.getElementById('contato').setAttribute('placeholder', 'Seu número de telefone');
+                document.getElementById('contato').setAttribute('minlength', 11);
+                document.getElementById('contato').setAttribute('maxlength', 11);
+            }
         }
 
-        addUser (nome, login, senha, email);
-        alert ('Usuário salvo com sucesso. Proceda com o login para ');
+        function cadastrar(event) {
+            event.preventDefault ();
 
-        $('#loginModal').modal('hide');
-    }
+            let nome   = document.getElementById('nome').value;
+            let login  = document.getElementById('contato').value;
+            let senha  = document.getElementById('senha').value;
+            let senha2 = document.getElementById('confSenha').value;
+            if (senha != senha2) {
+                alert ('As senhas informadas não conferem.');
+                return
+            }
 
-    document.getElementById ('login-form').addEventListener ('submit', processaFormLogin);
-    document.getElementById ('btn_salvar').addEventListener ('click', salvaLogin);  
-  </script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    
+            addUser (nome, login, senha);
+            alert ('Usuário salvo com sucesso.');
+            loginUser(login, senha);
+        }
+
+        document.getElementById('cadastro-form').addEventListener('submit',cadastrar);
+    </script> 
 </body>
 </html>

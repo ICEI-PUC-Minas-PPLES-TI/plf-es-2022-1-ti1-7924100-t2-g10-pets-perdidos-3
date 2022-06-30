@@ -148,10 +148,10 @@ var db_animal_inicial = {
 }
 
 // Caso os dados nao estejam no Local Storage, carrega os dados iniciais
-var db_usuario = JSON.parse(localStorage.getItem('db_usuario'));
+var db_usuario = JSON.parse(localStorage.getItem('db_usuarios'));
 if (!db_usuario) {
     db_usuario = db_usuario_inicial
-    localStorage.setItem('db_usuario', JSON.stringify(db_usuario))
+    localStorage.setItem('db_usuarios', JSON.stringify(db_usuario))
 };
 var db_animal = JSON.parse(localStorage.getItem('db_animais'));
 if (!db_animal) {
@@ -160,7 +160,6 @@ if (!db_animal) {
 };
 //_______________________________________________________________________________________________________________________
 //LOGIN.HTML - Script para formatação de estilo
-
 const fundo1 = "url(../img/fundo1.jpg)", fundo2 = "url(img/fundo2.jpg)",fundo3 = "url(img/fundo3.jpg)",fundo4 = "url(img/fundo4.jpg)",fundo5 = "url(img/fundo5.jpg)"
 const login_img = [fundo1,fundo2,fundo3,fundo4,fundo5]
 const doc_img = document.getElementById("img_login")
@@ -169,8 +168,24 @@ function random_img() {     // É chamada pelo onload da tag body em login.html
     document.getElementById("img_login").style.backgroundImage = (login_img[Math.floor(Math.random() * login_img.length)])
 }
 //_______________________________________________________________________________________________________________________
+//guardar imagem do input
+function previewFile() {
+    var preview = document.querySelector('img');
+    var file    = document.querySelector('input[type=file]').files[0];
+    var reader  = new FileReader();
+  
+    reader.onloadend = function () {
+      preview.src = reader.result;
+    }
+  
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      preview.src = "";
+    }
+  }
+//_______________________________________________________________________________________________________________________
 //Login e cadastro de usuário
-
 
 const LOGIN_URL = "login.html";
 
@@ -224,17 +239,18 @@ function initLoginApp () {
 };
 
 function loginUser (login, senha) {
-    for (var i = 0; i < db_usuarios.usuarios.length; i++) {
-        var usuario = db_usuarios.usuarios[i];
+    for (var i = 0; i < db_usuarios.data.length; i++) {
+        var usuario = db_usuarios.data[i];
 
-        if (login == usuario.login && senha == usuario.senha) {
+        if (login == usuario.contato && senha == usuario.senha) {
             usuarioCorrente.id = usuario.id;
-            usuarioCorrente.login = usuario.login;
-            usuarioCorrente.email = usuario.email;
             usuarioCorrente.nome = usuario.nome;
+            usuarioCorrente.contato = usuario.contato;
             
             sessionStorage.setItem ('usuarioCorrente', JSON.stringify (usuarioCorrente));
 
+            window.location.href = "index.html";
+            
             return true;
         }
     }
@@ -247,17 +263,25 @@ function logoutUser () {
     window.location = LOGIN_URL;
 }
 
-function addUser (nome, login, senha, email) {
+function addUser (nome, contato, senha) {
     let newId = generateUUID ();
-    let usuario = { "id": newId, "login": login, "senha": senha, "nome": nome, "email": email };
+    let usuario = { "id": newId, "nome": nome, "contato": contato, "senha": senha };
 
-    db_usuarios.usuarios.push (usuario);
+    db_usuarios.data.push (usuario);
 
     localStorage.setItem('db_usuarios', JSON.stringify (db_usuarios));
 }
 
 function setUserPass () {
 
+}
+
+function semLogin() {
+    if(!usuarioCorrenteJSON)
+    {
+        window.location = LOGIN_URL;
+        alert("Você precisa fazer login para acessar esse recurso!");
+    }
 }
 
 initLoginApp ();
@@ -306,10 +330,17 @@ function petsIncluirContato (){
     let porte = document.getElementById('porte').value;
     let raca = document.getElementById('raca').value;
     let idade = document.getElementById('idade').value;
-    let foto = document.getElementById('foto').value;
+    let foto = document.getElementById('foto').getAttribute('src');
     let descricao = document.getElementById('descricao').value;
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+
+    today = dd + '/' + mm + '/' + yyyy;
     
     let novoContato = {
+        id: generateUUID (),
         tipo: tipo,
         situacao: situacao,
         local: local,
@@ -318,7 +349,9 @@ function petsIncluirContato (){
         raca: raca,
         idade: idade,
         foto: foto,
-        descricao: descricao
+        descricao: descricao,
+        data: today,
+        usuario_id: usuarioCorrente.id
     };
 
     objDados.data.push (novoContato);
@@ -362,6 +395,14 @@ function animaisIndex() {    // É chamada pelo onload da tag body em index.html
     for (i = 0; j < 3; i++) {
         if(objDados.data[i].situacao == "Perdido")
         {
+            let contato;
+            for(let cont = 0; cont < db_usuarios.data.length; cont++)
+            {
+                if(db_usuarios.data[cont].id == objDados.data[i].usuario_id)
+                {
+                    contato = db_usuarios.data[cont].contato;
+                }
+            }
             j++;
             $("#animaisPerdidos").append(`
             <!-- CARD -->
@@ -390,7 +431,7 @@ function animaisIndex() {    // É chamada pelo onload da tag body em index.html
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <p>Contato: ${i}</p>
+                                <p>Contato: ${contato}</p>
                                 <p><small>Desaparecido em ${objDados.data[i].data}</small></p>
                             </div>
                         </div>
@@ -403,6 +444,14 @@ function animaisIndex() {    // É chamada pelo onload da tag body em index.html
     for (i = 0; k < 3; i++) {
         if(objDados.data[i].situacao == "Encontrado")
         {
+            let contato;
+            for(let cont = 0; cont < db_usuarios.data.length; cont++)
+            {
+                if(db_usuarios.data[cont].id == objDados.data[i].usuario_id)
+                {
+                    contato = db_usuarios.data[cont].contato;
+                }
+            }
             j++;
             k++;
             $("#animaisEncontrados").append(`
@@ -432,7 +481,7 @@ function animaisIndex() {    // É chamada pelo onload da tag body em index.html
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <p>Contato: ${i}</p>
+                                <p>Contato: ${contato}</p>
                                 <p><small>Desaparecido em ${objDados.data[i].data}</small></p>
                             </div>
                         </div>
@@ -473,9 +522,17 @@ function animaisPerdidos() {    // É chamada pelo onload da tag body em pets_pe
     // Popula a tabela com os registros do banco de dados
     //Perdidos
     let j = 0; 
-    for (i = 0; i < db_animal.data.length; i++) {
+    for (i = 0; i < objDados.data.length; i++) {
         if(objDados.data[i].situacao == "Perdido")
         {
+            let contato;
+            for(let cont = 0; cont < db_usuarios.data.length; cont++)
+            {
+                if(db_usuarios.data[cont].id == objDados.data[i].usuario_id)
+                {
+                    contato = db_usuarios.data[cont].contato;
+                }
+            }
             j++;
             $("#animaisPerdidos").append(`
             <!-- CARD -->
@@ -504,7 +561,7 @@ function animaisPerdidos() {    // É chamada pelo onload da tag body em pets_pe
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <p>Contato: ${i}</p>
+                                <p>Contato: ${contato}</p>
                                 <p><small>Desaparecido em ${objDados.data[i].data}</small></p>
                             </div>
                         </div>
@@ -525,9 +582,17 @@ function animaisEncontrados() {    // É chamada pelo onload da tag body em pets
     // Popula a tabela com os registros do banco de dados
     //Perdidos
     let j = 0; 
-    for (i = 0; i < db_animal.data.length; i++) {
+    for (i = 0; i < objDados.data.length; i++) {
         if(objDados.data[i].situacao == "Encontrado")
         {
+            let contato;
+            for(let cont = 0; cont < db_usuarios.data.length; cont++)
+            {
+                if(db_usuarios.data[cont].id == objDados.data[i].usuario_id)
+                {
+                    contato = db_usuarios.data[cont].contato;
+                }
+            }
             j++;
             $("#animaisEncontrados").append(`
             <!-- CARD -->
@@ -556,7 +621,7 @@ function animaisEncontrados() {    // É chamada pelo onload da tag body em pets
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <p>Contato: ${i}</p>
+                                <p>Contato: ${contato}</p>
                                 <p><small>Desaparecido em ${objDados.data[i].data}</small></p>
                             </div>
                         </div>
@@ -577,9 +642,17 @@ function animaisReunidos() {    // É chamada pelo onload da tag body em pets_re
     // Popula a tabela com os registros do banco de dados
     //Perdidos
     let j = 0; 
-    for (i = 0; i < db_animal.data.length; i++) {
+    for (i = 0; i < objDados.data.length; i++) {
         if(objDados.data[i].situacao == "com_o_dono")
         {
+            let contato;
+            for(let cont = 0; cont < db_usuarios.data.length; cont++)
+            {
+                if(db_usuarios.data[cont].id == objDados.data[i].usuario_id)
+                {
+                    contato = db_usuarios.data[cont].contato;
+                }
+            }
             j++;
             $("#animaisReunidos").append(`
             <!-- CARD -->
@@ -608,7 +681,7 @@ function animaisReunidos() {    // É chamada pelo onload da tag body em pets_re
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <p>Contato: ${i}</p>
+                                <p>Contato: ${contato}</p>
                                 <p><small>Desaparecido em ${objDados.data[i].data}</small></p>
                             </div>
                         </div>
@@ -618,8 +691,61 @@ function animaisReunidos() {    // É chamada pelo onload da tag body em pets_re
     }
 }
 //_______________________________________________________________________________________________________________________
-//Tela inicial
-//Perdidos
+//Pagina de perfil
+function animaisCadastrados() {    // É chamada pelo onload da tag body em pets_perdidos.html
+    // Remove todas as linhas do corpo da tabela
+    $("#animaisCadastrados").html("");
 
-//_______________________________________________________________________________________________________________________
-//Encontrados
+    let objDados = petsLeDados ();
+
+    // Popula a tabela com os registros do banco de dados
+    //Perdidos
+    let j = 0;
+    for (i = 0; i < objDados.data.length; i++) {
+        if(objDados.data[i].usuario_id == usuarioCorrente.id)
+        {
+            let contato;
+            for(let cont = 0; cont < db_usuarios.data.length; cont++)
+            {
+                if(db_usuarios.data[cont].id == objDados.data[i].usuario_id)
+                {
+                    contato = db_usuarios.data[cont].contato;
+                }
+            }
+            j++;
+            $("#animaisCadastrados").append(`
+            <!-- CARD -->
+            <div class="card" data-toggle="modal" data-target="#modal${j}">
+                <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
+                <div class="container">
+                <p>${objDados.data[i].descricao}</p>
+                <p>${objDados.data[i].data}</p>
+                </div>
+            </div>
+                <!-- MODAL -->
+                <div class="modal fade" id="modal${j}" tabindex="-1" role="dialog" aria-labelledby="modal${j}_titulo" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal${j}_titulo">${objDados.data[i].local}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
+                                <div class="modal_texto">
+                                    <p>${objDados.data[i].tipo} ${objDados.data[i].sexo} - ${objDados.data[i].raca} - ${objDados.data[i].idade}</p>
+                                    <p>${objDados.data[i].descricao}</p>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <p>Contato: ${contato}</p>
+                                <p><small>Desaparecido em ${objDados.data[i].data}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`);
+        }
+    }
+}

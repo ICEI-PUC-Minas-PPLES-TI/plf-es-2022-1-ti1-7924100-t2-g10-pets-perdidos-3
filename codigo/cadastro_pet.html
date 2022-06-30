@@ -32,7 +32,7 @@
     <title>Cadastro de Pets - Pets Hunter</title>
 </head>
 
-<body>
+<body onload="semLogin()">
     <h1>Registre seu Pet desaparecido</h1>
     <button id="btnCarregaDados" onclick="petsImprimeDados()">Carrega Dados</button>
     <div id="tela"></div>
@@ -84,9 +84,11 @@
                 <option value="Acima de 5 anos">Acima de 5 anos</option>
             </select>
         </div>
+        <!--CAMPO IMAGEM-->
         <div class="form-group">
             <label for="foto">Foto</label>
-            <input type="file" name="foto" id="foto" class="form-control">
+            <input type="file" onchange="previewFile()"><br>
+            <img src="" height="200" alt="Prévia da imagem..." id="foto">
         </div>
         <div class="form-group">
             <label for="descricao">Descrição</label>
