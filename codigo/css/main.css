@@ -115,6 +115,10 @@ section.home:last-of-type {
     margin: 25px 20px 10px;
 }
 
+#cadPet {
+    max-width: 400px;
+}
+
 .mais_btn {
     color: white;
     background-color: rgb(3, 190, 128);
@@ -204,6 +208,39 @@ div.modal-body>img {
         height: 15rem;
         object-fit: cover;
     }
+}
+
+/* Cadastro */
+body.cadastro {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../img/pets_wallpaper.jpg");
+}
+
+main.cadastro {
+    max-width: 800px;
+}
+
+section.cadastro {
+    padding: 35px 45px;
+    background-color: white;
+    border-radius: 8px;
+}
+
+main.p-4 {
+    text-align: center;
+}
+
+main.p-4>form {
+    text-align: left;
+}
+
+.form-group>img {
+    height: 12rem;
+    max-width: 100%;
+    object-fit: cover;
 }
 
 /* Login */

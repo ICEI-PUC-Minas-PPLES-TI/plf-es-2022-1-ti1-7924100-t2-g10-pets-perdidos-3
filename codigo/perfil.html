@@ -32,8 +32,39 @@
     <title>Perfil pessoal - Pets Hunter</title>
 </head>
 
-<body onload="animaisCadastrados(), semlogin()">
+<body onload="animaisCadastrados(), semLogin()">
+    <!-- Cabeçalho -->
+    <nav class="navbar navbar-expand-md sticky-top">
+        <img src="img/logo.png" alt="logo" id="logo" class="navbar-brand">
+        <button class="navbar-toggler btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="collapse" data-target="#navegacao" aria-controls="navegacao" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navegacao">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html" id="inicio">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pets_reunidos.html" id="reunidos">Pets já resgatados</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cadastro_pet.html" id="cadastroPet">Cadastrar um pet</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuário</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="perfil.html">Perfil</a>
+                        <a class="dropdown-item" href="login.html">Login</a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" onclick="logoutUser()">Logout</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <!-- Display dos pets -->
-    <div id="animaisCadastrados"></div>
+    <div id="animaisCadastrados" class="petsContain"></div>
 </body>
 </html>

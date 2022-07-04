@@ -170,7 +170,7 @@ function random_img() {     // É chamada pelo onload da tag body em login.html
 //_______________________________________________________________________________________________________________________
 //guardar imagem do input
 function previewFile() {
-    var preview = document.querySelector('img');
+    var preview = document.getElementById('foto');
     var file    = document.querySelector('input[type=file]').files[0];
     var reader  = new FileReader();
   
@@ -277,7 +277,7 @@ function setUserPass () {
 }
 
 function semLogin() {
-    if(!usuarioCorrenteJSON)
+    if(!usuarioCorrente.contato)
     {
         window.location = LOGIN_URL;
         alert("Você precisa fazer login para acessar esse recurso!");
@@ -358,27 +358,8 @@ function petsIncluirContato (){
 
     // Salvar os dados no localStorage novamente
     petsSalvaDados (objDados);
+}
 
-    // Atualiza os dados da tela
-    petsImprimeDados ();
-}
-//imprime os dados da tela
-function petsImprimeDados () {
-    let tela = document.getElementById('tela');
-    let strHtml = '';
-    let objDados = petsLeDados ();
-    
-    for (i=0; i< objDados.data.length; i++) {
-        strHtml += `<p>${objDados.data[i].foto}</p>
-        <p>${objDados.data[i].tipo} - ${objDados.data[i].sexo} - ${objDados.data[i].raca}</p>
-        <p>${objDados.data[i].situacao} em ${objDados.data[i].local}</p>
-        <p>Porte: ${objDados.data[i].porte} - Idade: ${objDados.data[i].idade}</p>
-        <p>Descrição: ${objDados.data[i].descricao}</p>`
-    }
-    
-    
-    tela.innerHTML = strHtml;
-}
 //_______________________________________________________________________________________________________________________
 //Apresentação de informação
     //INDEX.HTML - Completando a pagina inicial
@@ -692,7 +673,7 @@ function animaisReunidos() {    // É chamada pelo onload da tag body em pets_re
 }
 //_______________________________________________________________________________________________________________________
 //Pagina de perfil
-function animaisCadastrados() {    // É chamada pelo onload da tag body em pets_perdidos.html
+function animaisCadastrados() {    // É chamada pelo onload da tag body em perfil.html
     // Remove todas as linhas do corpo da tabela
     $("#animaisCadastrados").html("");
 

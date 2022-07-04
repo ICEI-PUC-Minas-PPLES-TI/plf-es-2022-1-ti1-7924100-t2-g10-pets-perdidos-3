@@ -33,70 +33,102 @@
 </head>
 
 <body onload="semLogin()">
-    <h1>Registre seu Pet desaparecido</h1>
-    <button id="btnCarregaDados" onclick="petsImprimeDados()">Carrega Dados</button>
-    <div id="tela"></div>
+    <!-- Cabeçalho -->
+    <nav class="navbar navbar-expand-md sticky-top">
+        <img src="img/logo.png" alt="logo" id="logo" class="navbar-brand">
+        <button class="navbar-toggler btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="collapse" data-target="#navegacao" aria-controls="navegacao" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navegacao">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html" id="inicio">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pets_reunidos.html" id="reunidos">Pets já resgatados</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuário</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="perfil.html">Perfil</a>
+                        <a class="dropdown-item" href="login.html">Login</a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" onclick="logoutUser()">Logout</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-    <form action="" id="petForm">
-        <div class="form-group">
-            <label for="tipo">Tipo</label>
-            <select name="tipo" id="tipo">
-                <option value="Gato">Gato</option>
-                <option value="Cachorro">Cachorro</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="situacao">Situação</label>
-            <select name="situacao" id="situacao">
-                <option value="Perdido">Desaparecido</option>
-                <option value="Encontrado">Encontrado<small>(Você encontrou o animal de alguém)</small></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="local">Local</label>
-            <input type="text" name="local" id="local" class="form-control" placeholder="Bairro...">
-        </div>
-        <div class="form-group">
-            <label for="sexo">Sexo</label>
-            <select name="sexo" id="sexo">
-                <option value="Fêmea">Fêmea</option>
-                <option value="Macho">Macho</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="porte">Porte</label>
-            <select name="porte" id="porte">
-                <option value="Pequeno">Pequeno</option>
-                <option value="Médio">Médio</option>
-                <option value="Grande">Grande</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="raca">Raça</label>
-            <input type="text" name="raca" id="raca" class="form-control" placeholder="SRD, Persa, Yorkshire...">
-        </div>
-        <div class="form-group">
-            <label for="idade">Idade</label>
-            <select name="idade" id="idade">
-                <option value="Até 1 ano">Até 1 ano</option>
-                <option value="Entre 1 e 3 anos">Entre 1 e 3 anos</option>
-                <option value="Entre 3 e 5 anos">Entre 3 e 5 anos</option>
-                <option value="Acima de 5 anos">Acima de 5 anos</option>
-            </select>
-        </div>
-        <!--CAMPO IMAGEM-->
-        <div class="form-group">
-            <label for="foto">Foto</label>
-            <input type="file" onchange="previewFile()"><br>
-            <img src="" height="200" alt="Prévia da imagem..." id="foto">
-        </div>
-        <div class="form-group">
-            <label for="descricao">Descrição</label>
-            <input type="text" name="descricao" id="descricao" class="form-control" placeholder="Cor do animal, marcas para diferenciação..." maxlength="150c">
-        </div>
-        <div>
-            <button id="cadPet" type="submit" class="btn btn_azul" value="cadPet" onclick="petsIncluirContato()">Cadastrar</button>
-        </div>
-    </form>
+    <main class="p-4">
+        <h1 class="titulo mb-4">Registre um Pet</h1>
+
+        <form action="perfil.html" id="petForm" class="row m-0 p-0">
+            <!--CAMPO IMAGEM-->
+            <div class="form-group col-md-6">
+                <label for="foto">Foto</label>
+                <input type="file" class="form-control" onchange="previewFile()" required><br>
+                <img src="" alt="Prévia da imagem..." id="foto">
+            </div>
+            <div class="col-md-6 row m-0 p-0">
+                <div class="form-group col-sm-6">
+                    <label for="tipo">Tipo</label>
+                    <select name="tipo" id="tipo" class="form-control" required>
+                        <option value="Gato">Gato</option>
+                        <option value="Cachorro">Cachorro</option>
+                    </select>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="situacao">Situação</label>
+                    <select name="situacao" id="situacao" class="form-control" required>
+                        <option value="Perdido">Desaparecido</option>
+                        <option value="Encontrado">Encontrado<small>(Você encontrou o animal de alguém)</small></option>
+                    </select>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="sexo">Sexo</label>
+                    <select name="sexo" id="sexo" class="form-control" required>
+                        <option value="Fêmea">Fêmea</option>
+                        <option value="Macho">Macho</option>
+                    </select>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="porte">Porte</label>
+                    <select name="porte" id="porte" class="form-control" required>
+                        <option value="Pequeno">Pequeno</option>
+                        <option value="Médio">Médio</option>
+                        <option value="Grande">Grande</option>
+                    </select>
+                </div>
+                <div class="form-group col-sm-12">
+                    <label for="local">Local</label>
+                    <input type="text" name="local" id="local" class="form-control" placeholder="Bairro..." required>
+                </div>
+            </div>
+            <div class="col-md-7 row m-0 p-0">
+                <div class="form-group col-sm-7">
+                    <label for="raca">Raça</label>
+                    <input type="text" name="raca" id="raca" class="form-control" placeholder="SRD, Persa, Yorkshire..." required>
+                </div>
+                <div class="form-group col-sm-5">
+                    <label for="idade">Idade</label>
+                    <select name="idade" id="idade" class="form-control" required>
+                        <option value="Até 1 ano">Até 1 ano</option>
+                        <option value="Entre 1 e 3 anos">Entre 1 e 3 anos</option>
+                        <option value="Entre 3 e 5 anos">Entre 3 e 5 anos</option>
+                        <option value="Acima de 5 anos">Acima de 5 anos</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-md-5">
+                <label for="descricao">Descrição</label>
+                <textarea rows="3" name="descricao" id="descricao" class="form-control" placeholder="Cor do animal, marcas para diferenciação..." maxlength="150c" required></textarea>
+            </div>
+            <div class="col-sm-12">
+                <button id="cadPet" type="submit" class="btn btn_azul" value="cadPet" onclick="petsIncluirContato()">Cadastrar</button>
+            </div>
+        </form>
+    </main>
 </body>
 </html>
