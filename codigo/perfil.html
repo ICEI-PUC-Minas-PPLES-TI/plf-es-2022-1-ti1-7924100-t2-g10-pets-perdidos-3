@@ -32,7 +32,7 @@
     <title>Perfil pessoal - Pets Hunter</title>
 </head>
 
-<body onload="animaisCadastrados(), semLogin()">
+<body onload="animaisCadastrados(), semLogin(), usuarioDados()">
     <!-- Cabeçalho -->
     <nav class="navbar navbar-expand-md sticky-top">
         <img src="img/logo.png" alt="logo" id="logo" class="navbar-brand">
@@ -64,7 +64,12 @@
         </div>
     </nav>
 
-    <!-- Display dos pets -->
-    <div id="animaisCadastrados" class="petsContain"></div>
+    <main class="row m-0 p-3">
+        <!-- Dados do usuario corrente -->
+        <section id="usuarioInfo" class="col-md-5 p-5"></section>
+
+        <!-- Display dos pets cadastrados pelo usuario-->
+        <aside id="animaisCadastrados" class="petsContain col-md-7 p-4"></aside>
+    </main>
 </body>
 </html>

@@ -286,3 +286,12 @@ form>div>button.btn_azul {
     margin: 15px;
     width: 50%;
 }
+
+/* Perfil */
+aside>h1 {
+    display: block;
+}
+
+#usuarioInfo {
+    border-right: 1px solid black;
+}

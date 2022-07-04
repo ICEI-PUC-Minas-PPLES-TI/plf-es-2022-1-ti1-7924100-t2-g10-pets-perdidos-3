@@ -490,7 +490,84 @@ function pesquisar() {
 }
 //_______________________________________________________________________________________________________________________
 //Perfil do usuário com animais que ele cadastrou
+function usuarioDados() {
+    $("#usuarioInfo").html("");
+    $("#usuarioInfo").append(`
+    <form id="user-form" class="form">
+        <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" name="nome" id="nome" class="form-control" value="${usuarioCorrente.nome}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="contato">Contato</label>
+            <input type="text" name="contato" id="contato" class="form-control" value="${usuarioCorrente.contato}" disabled>
+        </div>
+        <div class="form-group text-left">
+            <label for="senha">Senha</label>
+            <input type="password" name="password" id="password" class="form-control" value="${usuarioCorrente.senha}" disabled>
+        </div>
+    </form>`);
+}
 
+function animaisCadastrados() {    // É chamada pelo onload da tag body em perfil.html
+    // Remove todas as linhas do corpo da tabela
+    $("#animaisCadastrados").html(`<div class="container text-center mb-2">
+        <h2>Pets que você cadastrou</h2>
+    </div>`);
+
+    let objDados = petsLeDados ();
+
+    // Popula a tabela com os registros do banco de dados
+    //Perdidos
+    let j = 0;
+    for (i = 0; i < objDados.data.length; i++) {
+        if(objDados.data[i].usuario_id == usuarioCorrente.id)
+        {
+            let contato;
+            for(let cont = 0; cont < db_usuarios.data.length; cont++)
+            {
+                if(db_usuarios.data[cont].id == objDados.data[i].usuario_id)
+                {
+                    contato = db_usuarios.data[cont].contato;
+                }
+            }
+            j++;
+            $("#animaisCadastrados").append(`
+            <!-- CARD -->
+            <div class="card" data-toggle="modal" data-target="#modal${j}">
+                <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
+                <div class="container">
+                <p>${objDados.data[i].descricao}</p>
+                <p>${objDados.data[i].data}</p>
+                </div>
+            </div>
+                <!-- MODAL -->
+                <div class="modal fade" id="modal${j}" tabindex="-1" role="dialog" aria-labelledby="modal${j}_titulo" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal${j}_titulo">${objDados.data[i].local}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
+                                <div class="modal_texto">
+                                    <p>${objDados.data[i].tipo} ${objDados.data[i].sexo} - ${objDados.data[i].raca} - ${objDados.data[i].idade}</p>
+                                    <p>${objDados.data[i].descricao}</p>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <p>Contato: ${contato}</p>
+                                <p><small>Desaparecido em ${objDados.data[i].data}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`);
+        }
+    }
+}
 //_______________________________________________________________________________________________________________________
 //Página de animais perdidos
     //PETS_PERDIDOS.HTML - Completando a pagina com os pets corretos
@@ -636,65 +713,6 @@ function animaisReunidos() {    // É chamada pelo onload da tag body em pets_re
             }
             j++;
             $("#animaisReunidos").append(`
-            <!-- CARD -->
-            <div class="card" data-toggle="modal" data-target="#modal${j}">
-                <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
-                <div class="container">
-                <p>${objDados.data[i].descricao}</p>
-                <p>${objDados.data[i].data}</p>
-                </div>
-            </div>
-                <!-- MODAL -->
-                <div class="modal fade" id="modal${j}" tabindex="-1" role="dialog" aria-labelledby="modal${j}_titulo" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modal${j}_titulo">${objDados.data[i].local}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
-                                <div class="modal_texto">
-                                    <p>${objDados.data[i].tipo} ${objDados.data[i].sexo} - ${objDados.data[i].raca} - ${objDados.data[i].idade}</p>
-                                    <p>${objDados.data[i].descricao}</p>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <p>Contato: ${contato}</p>
-                                <p><small>Desaparecido em ${objDados.data[i].data}</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>`);
-        }
-    }
-}
-//_______________________________________________________________________________________________________________________
-//Pagina de perfil
-function animaisCadastrados() {    // É chamada pelo onload da tag body em perfil.html
-    // Remove todas as linhas do corpo da tabela
-    $("#animaisCadastrados").html("");
-
-    let objDados = petsLeDados ();
-
-    // Popula a tabela com os registros do banco de dados
-    //Perdidos
-    let j = 0;
-    for (i = 0; i < objDados.data.length; i++) {
-        if(objDados.data[i].usuario_id == usuarioCorrente.id)
-        {
-            let contato;
-            for(let cont = 0; cont < db_usuarios.data.length; cont++)
-            {
-                if(db_usuarios.data[cont].id == objDados.data[i].usuario_id)
-                {
-                    contato = db_usuarios.data[cont].contato;
-                }
-            }
-            j++;
-            $("#animaisCadastrados").append(`
             <!-- CARD -->
             <div class="card" data-toggle="modal" data-target="#modal${j}">
                 <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
