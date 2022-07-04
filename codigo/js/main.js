@@ -246,6 +246,7 @@ function loginUser (login, senha) {
             usuarioCorrente.id = usuario.id;
             usuarioCorrente.nome = usuario.nome;
             usuarioCorrente.contato = usuario.contato;
+            usuarioCorrente.senha = usuario.senha;
             
             sessionStorage.setItem ('usuarioCorrente', JSON.stringify (usuarioCorrente));
 
@@ -504,9 +505,73 @@ function usuarioDados() {
         </div>
         <div class="form-group text-left">
             <label for="senha">Senha</label>
-            <input type="password" name="password" id="password" class="form-control" value="${usuarioCorrente.senha}" disabled>
+            <input type="password" name="password" id="password" class="form-control" autocomplete="on" value="${usuarioCorrente.senha}" disabled>
         </div>
-    </form>`);
+    </form>
+    <!-- Botao do modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalMudanca">
+    Alterar dados
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalMudanca" tabindex="-1" role="dialog" aria-labelledby="alteraDados" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Altera os dados</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="chg-form" class="form">
+                    <div class="form-group">
+                        <label for="chgNome">Nome</label>
+                        <input type="text" name="nome" id="chgNome" class="form-control" value="${usuarioCorrente.nome}">
+                    </div>
+                    <div class="form-group">
+                        <label for="chgContato">Contato</label>
+                        <input type="text" name="contato" id="chgContato" class="form-control" value="${usuarioCorrente.contato}">
+                    </div>
+                    <div class="form-group text-left">
+                        <label for="chgSenha">Senha</label>
+                        <input type="password" name="password" id="chgSenha" class="form-control" autocomplete="on" value="${usuarioCorrente.senha}">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="usuMudarDados()">Salvar</button>
+            </div>
+        </div>
+    </div>
+    </div>`);
+}
+
+function usuMudarDados() {
+    for (let i = 0; i < db_usuarios.data.length; i++) {
+        getUsuarios = JSON.parse(localStorage.getItem('db_usuarios'));
+        let usuario = db_usuarios.data[i];
+        let nome = document.getElementById('chgNome').value;
+        let contato = document.getElementById('chgContato').value;
+        let senha = document.getElementById('chgSenha').value;
+
+        if (usuarioCorrente.id == usuario.id) {
+            getUsuarios.data[i].nome = nome;
+            getUsuarios.data[i].contato = contato;
+            getUsuarios.data[i].senha = senha;
+
+            localStorage.setItem('db_usuarios', JSON.stringify(getUsuarios));
+
+            usuarioCorrente.nome = nome;
+            usuarioCorrente.contato = contato;
+            
+            sessionStorage.setItem('usuarioCorrente', JSON.stringify (usuarioCorrente));
+
+            alert('Alterado com sucesso!!');
+            window.location.href = "perfil.html";
+        }
+    }
 }
 
 function animaisCadastrados() {    // É chamada pelo onload da tag body em perfil.html
