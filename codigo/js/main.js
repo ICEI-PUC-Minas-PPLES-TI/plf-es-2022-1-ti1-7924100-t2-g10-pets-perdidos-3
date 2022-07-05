@@ -36,7 +36,7 @@ var db_animal_inicial = {
             "id": 1,
             "situacao": "Perdido",
             "data": "02/06/2022",
-            "foto": "",
+            "foto": "https://source.unsplash.com/1000x900/?dog",
             "descricao": "Parece uma hiena e é igual um bolo formigueiro.",
             "idade": "Entre 1 e 3 anos",
             "local": "Bairro Jardim América",
@@ -50,7 +50,7 @@ var db_animal_inicial = {
             "id": 2,
             "situacao": "Perdido",
             "data": "28/05/2022",
-            "foto": "",
+            "foto": "https://source.unsplash.com/750x800/?dog",
             "descricao": "Foi perdida com um lacinho na cabeça.",
             "idade": "Entre 3 e 5 anos",
             "local": "Bairro Salgado filho",
@@ -64,7 +64,7 @@ var db_animal_inicial = {
             "id": 3,
             "situacao": "Encontrado",
             "data": "05/06/2022",
-            "foto": "",
+            "foto": "https://source.unsplash.com/1000x900/?cat",
             "descricao": "É muito sociável, foi encontrada em boas condições.",
             "idade": "Entre 1 e 3 anos",
             "local": "Bairro Nova Suiça",
@@ -78,7 +78,7 @@ var db_animal_inicial = {
             "id": 4,
             "situacao": "Perdido",
             "data": "03/06/2022",
-            "foto": "",
+            "foto": "https://source.unsplash.com/700x800/?cat",
             "descricao": "Saiu de casa normalmente, mas não voltou.",
             "idade": "Entre 1 e 3 anos",
             "local": "Bairro Grajaú",
@@ -90,9 +90,9 @@ var db_animal_inicial = {
         },
         {
             "id": 5,
-            "situacao": "com_o_dono",
+            "situacao": "Com o dono",
             "data": "08/06/2022",
-            "foto": "",
+            "foto": "https://source.unsplash.com/1200x1100/?dog",
             "descricao": "Encontrado em um bairro próximo em um terreno abandonado.",
             "idade": "Entre 1 e 3 anos",
             "local": "Bairro Grajaú",
@@ -106,7 +106,7 @@ var db_animal_inicial = {
             "id": 6,
             "situacao": "Encontrado",
             "data": "05/06/2022",
-            "foto": "",
+            "foto": "https://source.unsplash.com/1050x1000/?dog",
             "descricao": "Encontrado junto de outros cachorros que andavam pela rua.",
             "idade": "Até 1 ano",
             "local": "Bairro Nova Suiça",
@@ -120,7 +120,7 @@ var db_animal_inicial = {
             "id": 7,
             "situacao": "Encontrado",
             "data": "05/06/2022",
-            "foto": "",
+            "foto": "https://source.unsplash.com/1000x1000/?cat",
             "descricao": "Entrou na minha casa e ficou, está sendo bem cuidado.",
             "idade": "Entre 3 e 5 anos",
             "local": "Bairro Grajaú",
@@ -132,9 +132,9 @@ var db_animal_inicial = {
         },
         {
             "id": 8,
-            "situacao": "com_o_dono",
+            "situacao": "Com o dono",
             "data": "09/06/2022",
-            "foto": "",
+            "foto": "https://source.unsplash.com/1000x1000/?dog",
             "descricao": "Perdido em 24/05/2022, entraram em contato comigo por causa do site.",
             "idade": "Entre 1 e 3 anos",
             "local": "Bairro Salgado Filho",
@@ -373,57 +373,82 @@ function animaisIndex() {    // É chamada pelo onload da tag body em index.html
 
     // Popula a tabela com os registros do banco de dados
     //Perdidos
-    let j = 0; 
-    for (i = 0; j < 3; i++) {
+    let j = 0;
+    let tam = 0;
+    for (i = 0; i < db_animal.data.length; i++) {
         if(objDados.data[i].situacao == "Perdido")
         {
-            let contato;
-            for(let cont = 0; cont < db_usuarios.data.length; cont++)
+            tam++;
+        }
+    }
+    if(tam > 3)
+    {
+        tam = 3;
+    }
+    for (i = 0; j < tam; i++) {
+        if(!objDados.data[i].situacao) {}
+        else {
+            if(objDados.data[i].situacao == "Perdido")
             {
-                if(db_usuarios.data[cont].id == objDados.data[i].usuario_id)
+                let contato;
+                for(let cont = 0; cont < db_usuarios.data.length; cont++)
                 {
-                    contato = db_usuarios.data[cont].contato;
+                    if(db_usuarios.data[cont].id == objDados.data[i].usuario_id)
+                    {
+                        contato = db_usuarios.data[cont].contato;
+                    }
                 }
-            }
-            j++;
-            $("#animaisPerdidos").append(`
-            <!-- CARD -->
-            <div class="card card_${j}" data-toggle="modal" data-target="#modal${j}">
-                <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
-                <div class="container">
-                <p>${objDados.data[i].descricao}</p>
-                <p>${objDados.data[i].data}</p>
+                j++;
+                $("#animaisPerdidos").append(`
+                <!-- CARD -->
+                <div class="card card_${j}" data-toggle="modal" data-target="#modal${j}">
+                    <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
+                    <div class="container">
+                    <p>${objDados.data[i].descricao}</p>
+                    <p>${objDados.data[i].data}</p>
+                    </div>
                 </div>
-            </div>
-                <!-- MODAL 1.1 -->
-                <div class="modal fade" id="modal${j}" tabindex="-1" role="dialog" aria-labelledby="modal1_titulo" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modal1_titulo">${objDados.data[i].local}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
-                                <div class="modal_texto">
-                                    <p>${objDados.data[i].tipo} ${objDados.data[i].sexo} - ${objDados.data[i].raca} - ${objDados.data[i].idade}</p>
-                                    <p>${objDados.data[i].descricao}</p>
+                    <!-- MODAL 1.1 -->
+                    <div class="modal fade" id="modal${j}" tabindex="-1" role="dialog" aria-labelledby="modal1_titulo" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modal1_titulo">${objDados.data[i].local}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
+                                    <div class="modal_texto">
+                                        <p>${objDados.data[i].tipo} ${objDados.data[i].sexo} - ${objDados.data[i].raca} - ${objDados.data[i].idade}</p>
+                                        <p>${objDados.data[i].descricao}</p>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <p>Contato: ${contato}</p>
+                                    <p><small>Desaparecido em ${objDados.data[i].data}</small></p>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <p>Contato: ${contato}</p>
-                                <p><small>Desaparecido em ${objDados.data[i].data}</small></p>
-                            </div>
                         </div>
-                    </div>
-                </div>`);
+                    </div>`);
+            }
         }
     }
     //Encontrados
     let k = 0;
-    for (i = 0; k < 3; i++) {
+    tam = 0;
+    for (i = 0; i < db_animal.data.length; i++) {
+        if(objDados.data[i].situacao == "Encontrado")
+        {
+            tam++;
+        }
+    }
+    if(tam > 3)
+    {
+        tam = 3;
+    }
+    for (i = 0; k < tam; i++) {
         if(objDados.data[i].situacao == "Encontrado")
         {
             let contato;
@@ -492,7 +517,9 @@ function pesquisar() {
 //_______________________________________________________________________________________________________________________
 //Perfil do usuário com animais que ele cadastrou
 function usuarioDados() {
-    $("#usuarioInfo").html("");
+    $("#usuarioInfo").html(`<div class="container text-center mb-2">
+        <h2>Seus dados</h2>
+    </div>`);
     $("#usuarioInfo").append(`
     <form id="user-form" class="form">
         <div class="form-group">
@@ -588,22 +615,17 @@ function animaisCadastrados() {    // É chamada pelo onload da tag body em perf
     for (i = 0; i < objDados.data.length; i++) {
         if(objDados.data[i].usuario_id == usuarioCorrente.id)
         {
-            let contato;
-            for(let cont = 0; cont < db_usuarios.data.length; cont++)
-            {
-                if(db_usuarios.data[cont].id == objDados.data[i].usuario_id)
-                {
-                    contato = db_usuarios.data[cont].contato;
-                }
-            }
             j++;
             $("#animaisCadastrados").append(`
             <!-- CARD -->
-            <div class="card" data-toggle="modal" data-target="#modal${j}">
+            <div class="card cardPerfil" data-toggle="modal" data-target="#modal${j}">
                 <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
-                <div class="container">
-                <p>${objDados.data[i].descricao}</p>
-                <p>${objDados.data[i].data}</p>
+                <div class="container perfil">
+                    <p>${objDados.data[i].situacao}</p>
+                    <p>${objDados.data[i].descricao}</p>
+                    <div class="card-footer">
+                        <p>${objDados.data[i].data}</p>
+                    </div>
                 </div>
             </div>
                 <!-- MODAL -->
@@ -611,27 +633,60 @@ function animaisCadastrados() {    // É chamada pelo onload da tag body em perf
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="modal${j}_titulo">${objDados.data[i].local}</h5>
+                                <h5 class="modal-title" id="modal${j}_titulo">Remover o pet do site:</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
-                                <img src="${objDados.data[i].foto}" alt="imagem do animal${j}">
-                                <div class="modal_texto">
-                                    <p>${objDados.data[i].tipo} ${objDados.data[i].sexo} - ${objDados.data[i].raca} - ${objDados.data[i].idade}</p>
-                                    <p>${objDados.data[i].descricao}</p>
+                            <div id="modalBtn" class="modal-body p-3">
+                                <div>
+                                    <button type="button" id="p_resgatados" value="${objDados.data[i].id}" class="btn btn_amarelo m-2" onclick="petFoiEncontrado(this.value)">Foi encontrado</button>
+                                    <button type="button" id="s_delete" value="${objDados.data[i].id}" class="btn btn-outline-danger m-2" onclick="petDelete(this.value)">Somente excluir</button>
                                 </div>
+                                <p><small>*O botão "Foi encontrado" leva o animal para nossa página de pets já resgatados.</small></p>
                             </div>
                             <div class="modal-footer">
-                                <p>Contato: ${contato}</p>
-                                <p><small>Desaparecido em ${objDados.data[i].data}</small></p>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             </div>
                         </div>
                     </div>
                 </div>`);
         }
     }
+}
+
+function petFoiEncontrado(id) {
+    getAnimais = JSON.parse(localStorage.getItem('db_animais'));
+    for (let i = 0; i < db_animal.data.length; i++) {
+        let pet = db_animal.data[i];
+        if(pet.id == id)
+        {
+            getAnimais.data[i].situacao = "Com o dono";
+            localStorage.setItem('db_animais', JSON.stringify(getAnimais));
+            break;
+        }
+    }
+
+    alert("Seu pet agora aparece na página 'Pets já resgatados'!!");
+    window.location.href = "perfil.html";
+}
+
+function petDelete(id) {
+    getAnimais = JSON.parse(localStorage.getItem('db_animais'));
+    for (let i = 0; i < db_animal.data.length; i++) {
+        let pet = db_animal.data[i];
+        if(pet.id == id)
+        {
+            getAnimais.data.splice(i,1);
+
+            localStorage.setItem('db_animais', JSON.stringify(getAnimais));
+            
+            break;
+        }
+    }
+
+    alert(`O pet foi deletado com sucesso!!`);
+    window.location.href = "perfil.html";
 }
 //_______________________________________________________________________________________________________________________
 //Página de animais perdidos
@@ -766,7 +821,7 @@ function animaisReunidos() {    // É chamada pelo onload da tag body em pets_re
     //Perdidos
     let j = 0; 
     for (i = 0; i < objDados.data.length; i++) {
-        if(objDados.data[i].situacao == "com_o_dono")
+        if(objDados.data[i].situacao == "Com o dono")
         {
             let contato;
             for(let cont = 0; cont < db_usuarios.data.length; cont++)

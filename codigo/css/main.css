@@ -49,13 +49,12 @@ button.btn_azul:hover {
 button.btn_amarelo {
     background-color: white;
     color: #edca2d;
-    border: solid 2px #edca2d;
-    font-size: large;
+    border: solid 1px #edca2d;
 }
 
 button.btn_amarelo:hover {
     background-color: #edca2d;
-    border: solid 2px #edca2d;
+    border: solid 1px #edca2d;
     color: white;
 }
 /* Homepage */
@@ -182,6 +181,41 @@ div.modal-body>img {
     justify-content: space-around;
     align-items: center;
     flex-flow: wrap row;
+}
+
+.petsPerfil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cardPerfil {
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    border: 2px solid rgb(90, 233, 185);
+    border-radius: 15px;
+}
+
+.cardPerfil>img {
+    border-radius: 14px;
+    max-width: 40%;
+}
+
+div.perfil {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-footer {
+    height: 50px;
+}
+
+#modalBtn {
+    text-align: center;
+    align-items: center;
 }
 
 @media (max-width: 850px) {
