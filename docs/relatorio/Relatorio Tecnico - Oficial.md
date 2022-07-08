@@ -102,8 +102,8 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 |ID    | Descrição do Requisito  | Prioridade |
 |------|-----------------------------------------|----|
-|RF-001| Registro de pets	Alta| ALTA | 
-|RF-002| Divulgação no site	Alta | ALTA |
+|RF-001| Registro de pets	| ALTA | 
+|RF-002| Login e registro | ALTA |
 |RF-003| Filtro de localização| ALTA | 
 |RF-004| Registro de pets abrigados| ALTA |
 |RF-005| Área de contato | MÉDIA | 
@@ -240,9 +240,15 @@ ver os pets mais recentes, e tera as opçoes de abrir a pagina de usuario, pagin
 ou entrar na pagina de pets desaparecido ou na de pets abrigados
 
 Caso o usuario opte por seguir e registrar ele sera redirecionado para pagina de registro 
-onde, apos preencher 
+onde, apos preencher oque foi pedido pode registrar seu pet e velo na aba de perfil
 
+## Plano de testes
 
-![Exemplo de UserFlow](images/user_flow.png)
+| ID | CENÁRIO | REQUISITO RELACIONADO |
+|----|---------|-----------------------|
+| 1 | `Registrar animal` <br><br> Passo a passo: <br> `1.` Fazer login <br> `2.` Abrir painel de registro de pet <br> `3.` preencher todos os campos <br> `4.` Clicar no botão "Cadastrar" <br><br> Após clicar no botão, o sistema mostrará o animal na pagina principal. | RF-001 | 
+| 2 | `Cadastrar Usuario` <br><br> Passo a passo: <br> `1.` Entrar na pagina principal <br> `2.` Abrir o menu de login <br> `3.` Clicar em Registre-se <br> `4.` Preencher todos os campos corretamente <br> <br> `6.` Clicar no botão "Cadastrar-se" <br><br> Após clicar no botão, o sistema mostrará que o usuario foi registrado. | RF-002 |
+| 3 |  `Pequisar por animal` <br><br> Passo a passo: <br> `1.` Fazer login <br> `2.` Abrir a pagina principal <br> `3.` Clicar em na lupa <br> `4.` Digite a descrição do animal ou a localização <br> | RF-003 |
+
 
 
