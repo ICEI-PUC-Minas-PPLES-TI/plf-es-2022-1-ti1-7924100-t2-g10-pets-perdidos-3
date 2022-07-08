@@ -209,4 +209,40 @@ Quanto à gerência de issues, o projeto não adotou a utilização de issues e 
 
 A hospedagem da plataforma foi feita no Replit, de forma gratuita e simplesmente criando um projeto e fazendo o upload dos arquivos.
 
+# Projeto da Solução
+
+## Tecnologias utilizadas
+| TIPO | NOME |
+|------|------|
+| Linguagem de marcação | HTML |
+| Linguagem de estilo | CSS |
+| Linguagem de programação | JavaScript |
+| Framework | Bootstrap |
+| Biblioteca | jQuery |
+| IDE | Visual Studio Code |
+| Versionamento de código | Git |
+| Controle de versão compartilhado | GitHub |
+| Hospedagem | Replit |
+
+
+
+## Arquitetura da solução
+
+> Inclua um diagrama da solução e descreva os módulos e as tecnologias
+> que fazem parte da solução. Discorra sobre o diagrama.
+
+A imagem a seguir ilustra a o fluxo do usuário em nossa solução. Assim
+que o usuário entra na plataforma, ele é apresentado à tela inicial
+e é redirecionado para o pagina de login/registro de usuario
+
+Caso logue ele é redirecionado para pagina principal, nessa tela ele podera
+ver os pets mais recentes, e tera as opçoes de abrir a pagina de usuario, pagina de registro de pet
+ou entrar na pagina de pets desaparecido ou na de pets abrigados
+
+Caso o usuario opte por seguir e registrar ele sera redirecionado para pagina de registro 
+onde, apos preencher 
+
+
+![Exemplo de UserFlow](images/user_flow.png)
+
 
