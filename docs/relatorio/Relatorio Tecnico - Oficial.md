@@ -247,8 +247,25 @@ onde, apos preencher oque foi pedido pode registrar seu pet e velo na aba de per
 | ID | CENÁRIO | REQUISITO RELACIONADO |
 |----|---------|-----------------------|
 | 1 | `Registrar animal` <br><br> Passo a passo: <br> `1.` Fazer login <br> `2.` Abrir painel de registro de pet <br> `3.` preencher todos os campos <br> `4.` Clicar no botão "Cadastrar" <br><br> Após clicar no botão, o sistema mostrará o animal na pagina principal. | RF-001 | 
-| 2 | `Cadastrar Usuario` <br><br> Passo a passo: <br> `1.` Entrar na pagina principal <br> `2.` Abrir o menu de login <br> `3.` Clicar em Registre-se <br> `4.` Preencher todos os campos corretamente <br> <br> `6.` Clicar no botão "Cadastrar-se" <br><br> Após clicar no botão, o sistema mostrará que o usuario foi registrado. | RF-002 |
+| 2 | `Cadastrar Usuario` <br><br> Passo a passo: <br> `1.` Entrar na pagina principal <br> `2.` Abrir o menu de login <br> `3.` Clicar em Registre-se <br> `4.` Preencher todos os campos corretamente <br> `6.` Clicar no botão "Cadastrar-se" <br><br> Após clicar no botão, o sistema mostrará que o usuario foi registrado. | RF-002 |
 | 3 |  `Pequisar por animal` <br><br> Passo a passo: <br> `1.` Fazer login <br> `2.` Abrir a pagina principal <br> `3.` Clicar em na lupa <br> `4.` Digite a descrição do animal ou a localização <br> | RF-003 |
 
+## Registro de testes 
+Os testes foram fundamentais para identificar falhas no desenvolvimento e na experiência do usuário.
+
+# Referências
+
+## Fontes utilizadas para a idealização do projeto
+> http://institutopetbrasil.com/imprensa/censo-pet-1393-milhoes-dehttp://institutopetbrasil.com/imprensa/censo-pet-1393-milhoes-de-animais-de-estimacao-no-brasil/animais-de-estimacao-no-brasil/ 
+
+> https://g1.globo.com/sp/sao-paulo/noticia/2019/08/18/brasil-temhttps://g1.globo.com/sp/sao-paulo/noticia/2019/08/18/brasil-tem-mais-de-170-mil-animais-abandonados-sob-cuidado-de-ongs-aponta-instituto.ghtmlmais-de-170-mil-animais-abandonados-sob-cuidado-de-ongs-apontahttps://g1.globo.com/sp/sao-paulo/noticia/2019/08/18/brasil-tem-mais-de-170-mil-animais-abandonados-sob-cuidado-de-ongs-aponta-instituto.ghtmlinstituto.ghtml 
+
+> https://www1.folha.uol.com.br/cotidiano/2020/07/abandono-dehttps://www1.folha.uol.com.br/cotidiano/2020/07/abandono-de-animais-cresce-durante-quarentena.shtmlanimais-cresce-durante-quarentena.shtml 
+
+>https://www.gov.br/agricultura/pt-br/assuntos/camaras-setoriaishttps://www.gov.br/agricultura/pt-br/assuntos/camaras-setoriais-tematicas/documentos/camaras-tematicas/insumos-agropecuarios/anos-anteriores/ibge-populacao-de-animais-de-estimacao-no-brasil-2013-abinpet-79.pdf/viewtematicas/documentos/camaras-tematicas/insumos-agropecuarios/anos
+
+>https://www.gov.br/agricultura/pt-br/assuntos/camaras-setoriaishttps://www.gov.br/agricultura/pt-br/assuntos/camaras-setoriais-tematicas/documentos/camaras-tematicas/insumos-agropecuarios/anos-anteriores/ibge-populacao-de-animais-de-estimacao-no-brasil-2013-abinpet-79.pdf/viewtematicas/documentos/camaras-tematicas/insumos-agropecuarios/anos
+
+/
 
 
