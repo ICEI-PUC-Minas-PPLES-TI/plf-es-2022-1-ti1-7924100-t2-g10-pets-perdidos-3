@@ -186,29 +186,27 @@ Pedro<br>
 |-----------|-------------------------|---------------|
 |Processo de Design Thinkgin  | Miro |  https://miro.com/app/board/uXjVOBTTWDs=/ | 
 |Repositório de código | GitHub | https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2022-1-ti1-7924100-t2-g10-pets-perdidos-3 | 
-|Hospedagem do site | Heroku |  https://XXXXXXX.herokuapp.com | 
+|Hospedagem do site | Heroku | https://petshunter.amandams.repl.co/ | 
 |Protótipo Interativo | MavelApp ou Figma | https://www.figma.com/proto/8FD43lnrEnn0bM0C0U7OST/Wireframing-in-Figma?node-id=0%3A656&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=0%3A656&show-proto-sidebar=1 | 
 
 
 ## Controle de Versão
 
-> A ferramenta de controle de versão adotada no projeto foi o
-> [Git](https://git-scm.com/), sendo que o [Github](https://github.com)
-> foi utilizado para hospedagem do repositório `upstream`.
-> 
-> O projeto segue a seguinte convenção para o nome de branchs:
-> 
-> - `master`: versão estável já testada do software
-> - `unstable`: versão já testada do software, porém instável
-> - `testing`: versão em testes do software
-> - `dev`: versão de desenvolvimento do software
-> 
-> Quanto à gerência de issues, o projeto adota a seguinte convenção para
-> etiquetas:
-> 
-> - `bugfix`: uma funcionalidade encontra-se com problemas
-> - `enhancement`: uma funcionalidade precisa ser melhorada
-> - `feature`: uma nova funcionalidade precisa ser introduzida
->
+# Gestão de Configuração
+
+## Controle de Versão
+
+A ferramenta de controle de versão adotada no projeto foi o [Git](https://git-scm.com/), sendo que o [Github](https://github.com) foi utilizado para hospedagem do repositório.
+
+O projeto segue a seguinte convenção para o nome de branchs:
+
+- `master`: versão estável do software
+- `dev`: versão de desenvolvimento do software
+
+Quanto à gerência de issues, o projeto não adotou a utilização de issues e tags.
+
+## Hospedagem
+
+A hospedagem da plataforma foi feita no Replit, de forma gratuita e simplesmente criando um projeto e fazendo o upload dos arquivos.
 
 
