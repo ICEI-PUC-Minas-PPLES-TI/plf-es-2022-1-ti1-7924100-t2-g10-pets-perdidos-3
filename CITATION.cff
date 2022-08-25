@@ -1,0 +1,41 @@
+cff-version: 1.0.1
+message: Please cite this software using these metadata.
+title: T2-G10 - Pets Perdidos 3 (Pet Hunter)
+authors:
+  - family-names: Moura de Souza
+    given-names: Amanda
+  - family-names: Perez Monteiro
+    given-names: João Gabriel
+  - family-names: Carvalho Peres
+    given-names: Lucas
+  - family-names: Mendes Santos
+    given-names: Luiz Gustavo
+  - family-names: Machado Santos
+    given-names: Pedro Lucas
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Augusto Lara Soares
+    given-names: Felipe
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Alves de Oliveira
+    given-names: Jonathan
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Felipe Dias Ferreira da Rocha
+    given-names: Roberto    
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Vieira Carneiro
+    given-names: Rommel
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: de Assis Alves da Silva
+    given-names: Simone
+
+keywords:
+  - pets
+repository-code: https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2022-1-ti1-7924100-t2-g10-pets-perdidos-3
+license: CC-BY-4.0
+version: 1.0.0
+date-released: 2022-07-14    
